@@ -1,4 +1,5 @@
 ﻿using System;
+using CollectionFunction;
 //using HouseFunction;
 //Line comment example
 /*
@@ -23,6 +24,9 @@ namespace HelloWorld
             Console.WriteLine("What's your name?");
             string name = Console.ReadLine();
             Console.WriteLine($"Hello, {name}! Nice to meet you!");
+
+            Collection collectionObj = new Collection();
+            collectionObj.CollectionMain();
         }
     }
 }
