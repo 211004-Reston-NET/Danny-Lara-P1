@@ -2,7 +2,7 @@ namespace HouseFunction
 {
     public class House
     {
-        private string owner;
+        /*private string owner;
         private string ghost;
         private int roomCount;
 
@@ -11,6 +11,6 @@ namespace HouseFunction
             owner = "Danny";
             ghost = "Casper";
             roomCount = 1;
-        }
+        }*/
     }
 }
