@@ -1,6 +1,7 @@
-//NOT DONE!
+//NOT DONE! Need to add/use logic checks for user input
 using System;
 using Models;
+using DataAccessLogic;
 namespace UserInterface
 {
     public class AddCustomer : IMenu
@@ -15,6 +16,7 @@ namespace UserInterface
 
         public void Menu()
         {
+            Console.Clear();
             Console.WriteLine("Enter customer name:");
             string name = Console.ReadLine();
             Console.WriteLine("Enter address:");

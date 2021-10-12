@@ -1,3 +1,4 @@
+using DataAccessLogic;
 namespace UserInterface
 {
     public enum MenuType
@@ -21,6 +22,7 @@ namespace UserInterface
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="data"></param>
         /// <returns></returns>
         MenuType Choice();
     }

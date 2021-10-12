@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using DataAccessLogic;
 
 namespace UserInterface
 {
@@ -23,11 +25,21 @@ namespace UserInterface
                     case MenuType.AddCustomer:
                         page = new AddCustomer();
                         break;
-                    /*case "2":
-                    case "3":
-                    case "4":
-                    case "5":
-                    case "6":*/
+                    case MenuType.Search:
+                        page = new Search();
+                        break;
+                    case MenuType.Inventory:
+                        page = new Inventory();
+                        break;
+                    case MenuType.PlaceOrder:
+                        page = new PlaceOrder();
+                        break;
+                    case MenuType.OrderHistory:
+                        page = new OrderHistory();
+                        break;
+                    case MenuType.Replenish:
+                        page = new Replenish();
+                        break;
                     case MenuType.Exit:
                         Console.WriteLine("Thank you, and have a nice day!");
                         loop = false;

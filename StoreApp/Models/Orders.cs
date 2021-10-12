@@ -5,7 +5,7 @@ namespace Models
     public class Orders
     {
         private List<LineItems> items;
-        private string location;
+        private StoreFront storeLocation;
         private double totalPrice;
     }
 }

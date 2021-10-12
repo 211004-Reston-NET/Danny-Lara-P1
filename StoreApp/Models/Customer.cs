@@ -16,6 +16,7 @@ namespace Models
             address = custAddress;
             email = custEmail;
             phoneNumber = custPhone;
+            orders = new List<Orders>();
         }
 
         public string Name { get => name; set => name = value; }
