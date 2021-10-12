@@ -31,7 +31,7 @@ namespace DataAccessLogic
             List<Customer> customerList = GetAllCustomers();
             customerList.Add(p_customer);
 
-            _jsonString = JsonSerializer.Serialize(customerList);
+            _jsonString = JsonSerializer.Serialize(customerList, new JsonSerializerOptions{WriteIndented=true});
             File.WriteAllText(_customerFilepath,_jsonString);
             return p_customer;
         }
@@ -40,6 +40,6 @@ namespace DataAccessLogic
             _jsonString = File.ReadAllText(_customerFilepath);
             return JsonSerializer.Deserialize<List<Customer>>(_jsonString);
         }
-        
+
     }
 }

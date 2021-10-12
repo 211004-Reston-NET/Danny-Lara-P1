@@ -19,6 +19,7 @@ namespace UserInterface
             {
                 case "5":
                     _customerBL.Add(_cust);
+                    Console.Clear();
                     return MenuType.MainMenu;
                 case "4":
                     Console.WriteLine("Enter customer name:");
