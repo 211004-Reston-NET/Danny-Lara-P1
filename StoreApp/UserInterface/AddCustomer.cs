@@ -19,6 +19,8 @@ namespace UserInterface
             {
                 case "5":
                     _customerBL.Add(_cust);
+                    Console.WriteLine("Customer added!\nPress Enter to continue...");
+                    Console.ReadLine();
                     Console.Clear();
                     return MenuType.MainMenu;
                 case "4":
@@ -37,6 +39,8 @@ namespace UserInterface
                     Console.WriteLine("Enter email address:");
                     _cust.Email = Console.ReadLine();
                     return MenuType.AddCustomer;
+                case "0":
+                    return MenuType.MainMenu;
                 default:
                     Console.WriteLine("Invalid Input!");
                     Console.WriteLine("Press Enter to continue...");

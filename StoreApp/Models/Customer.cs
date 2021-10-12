@@ -26,5 +26,10 @@ namespace Models
         public string Email { get => email; set => email = value; }
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public List<Orders> Orders { get => orders; set => orders = value; }
+
+        public override string ToString()
+        {
+            return $"Name:\t\t{Name}\nAddresss:\t{Address}\nEmail:\t\t{Email}\nPhone#:\t\t{PhoneNumber}";
+        }
     }
 }
