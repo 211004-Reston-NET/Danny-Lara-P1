@@ -10,6 +10,8 @@ namespace Models
         private string phoneNumber;
         private List<Orders> orders;
 
+        public Customer(){}
+        
         public Customer(string custName, string custAddress, string custEmail, string custPhone)
         {
             name = custName;

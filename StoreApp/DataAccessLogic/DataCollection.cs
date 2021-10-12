@@ -40,5 +40,6 @@ namespace DataAccessLogic
             _jsonString = File.ReadAllText(_customerFilepath);
             return JsonSerializer.Deserialize<List<Customer>>(_jsonString);
         }
+        
     }
 }

@@ -10,7 +10,7 @@ namespace UserInterface
             switch (input)
             {
                 case "1":
-                    //Get info for Store 1
+                    
                     break;
                 case "2":
                     break;

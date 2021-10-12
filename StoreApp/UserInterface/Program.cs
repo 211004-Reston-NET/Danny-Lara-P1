@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BusinessLogic;
 using DataAccessLogic;
 
 namespace UserInterface
@@ -23,7 +24,7 @@ namespace UserInterface
                         page = new MainMenu();
                         break;
                     case MenuType.AddCustomer:
-                        page = new AddCustomer();
+                        page = new AddCustomer(new CustomerBL(new DataCollection()));
                         break;
                     case MenuType.Search:
                         page = new Search();
