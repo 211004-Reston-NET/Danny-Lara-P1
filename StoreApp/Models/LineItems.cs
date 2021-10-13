@@ -6,5 +6,8 @@ namespace Models
     {
         private Products product;
         private int quantity;
+
+        public Products Product { get => product; set => product = value; }
+        public int Quantity { get => quantity; set => quantity = value; }
     }
 }
