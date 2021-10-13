@@ -5,7 +5,7 @@ using Models;
 
 namespace DataAccessLogic
 {
-    public class DataCollection
+    public class Repository
     {
         private const string _storeFilepath = "./../DataAccessLogic/Database/StoreData.json";
         private const string _customerFilepath = "./../DataAccessLogic/Database/CustomerData.json";
@@ -16,7 +16,7 @@ namespace DataAccessLogic
             List<Store> storeList = GetAllStores();
             storeList.Add(p_store);
 
-            _jsonString = JsonSerializer.Serialize(storeList);
+            _jsonString = JsonSerializer.Serialize(storeList, new JsonSerializerOptions{WriteIndented=true});
             File.WriteAllText(_storeFilepath,_jsonString);
             return p_store;
         }
