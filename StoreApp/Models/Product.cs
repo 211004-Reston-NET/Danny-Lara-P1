@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    public class Products
+    public class Product
     {
         private string name;
         private double price;

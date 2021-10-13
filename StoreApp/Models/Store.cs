@@ -6,18 +6,18 @@ namespace Models
     {
         private string _name;
         private string _address;
-        private List<Products> _products;
+        private List<Product> _products;
         private List<Order> _orders;
 
         public string Name { get => _name; set => _name = value; }
         public string Address { get => _address; set => _address = value; }
-        public List<Products> Products { get => _products; set => _products = value; }
+        public List<Product> Products { get => _products; set => _products = value; }
         public List<Order> Orders { get => _orders; set => _orders = value; }
 
         public override string ToString()
         {
             string output = $"Store name: {Name}\nAddress: {Address}\nItems: ";
-            foreach (Products item in Products)
+            foreach (Product item in Products)
             {
                 output += item.Name;
                 output += ", ";
