@@ -5,7 +5,7 @@ namespace Models
     public class Order
     {
         private List<LineItems> items;
-        private StoreFront store;
+        private Store store;
         private double totalPrice;
 
         public Order()
@@ -17,7 +17,7 @@ namespace Models
             }
             totalPrice = total;
         }
-        public Order(List<LineItems> p_items, StoreFront p_store)
+        public Order(List<LineItems> p_items, Store p_store)
         {
             items = p_items;
             store = p_store;
@@ -29,7 +29,19 @@ namespace Models
             totalPrice = total;
         }
         public List<LineItems> Items { get => items; set => items = value; }
-        public StoreFront Store { get => store; set => store = value; }
+        public Store Store { get => store; set => store = value; }
         public double TotalPrice { get => totalPrice; set => totalPrice = value; }
+
+        public override string ToString()
+        {
+            string s = "Store: " + store.Name;
+            s += "Items:\n";
+            foreach (LineItems item in items)
+            {
+                s += $"{item.Product.Name} ({item.Quantity}) at ${item.Product.Price} each\n";
+            }
+            s += $"Order total: ${totalPrice}";
+            return s;
+        }
     }
 }

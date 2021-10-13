@@ -16,7 +16,7 @@ namespace Models
 
         public override string ToString()
         {
-            return $"Product name:\t{Name}\nPrice:\t\t${Price}\nDescription:\t{Description}\nCategory:\t\t{Category}";
+            return $"Product name:\t{Name}\nPrice:\t\t${Price}\nDescription:\t{Description}\nCategory:\t{Category}";
         }
     }
 }

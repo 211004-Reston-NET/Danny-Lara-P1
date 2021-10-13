@@ -12,12 +12,12 @@ namespace Models
 
         public Customer(){}
         
-        public Customer(string custName, string custAddress, string custEmail, string custPhone)
+        public Customer(string p_name, string p_address, string p_email, string p_phone)
         {
-            name = custName;
-            address = custAddress;
-            email = custEmail;
-            phoneNumber = custPhone;
+            name = p_name;
+            address = p_address;
+            email = p_email;
+            phoneNumber = p_phone;
             orders = new List<Order>();
         }
 

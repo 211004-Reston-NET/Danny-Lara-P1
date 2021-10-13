@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    public class StoreFront
+    public class Store
     {
         private string _name;
         private string _address;
@@ -16,17 +16,19 @@ namespace Models
 
         public override string ToString()
         {
-            string output = $"Store name: {Name}\nAddress: {Address}\n";
+            string output = $"Store name: {Name}\nAddress: {Address}\nItems: ";
             foreach (Products item in Products)
             {
-                output += item;
-                output += '\n';
+                output += item.Name;
+                output += ", ";
             }
+            output = output.Remove(output.Length-2);
+            /*output += "\nOrders: ";
             foreach (Order order in Orders)
             {
                 output += order;
                 output += '\n';
-            }
+            }*/
             return output;
         }
     }

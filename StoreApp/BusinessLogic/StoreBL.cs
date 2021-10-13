@@ -11,11 +11,11 @@ namespace BusinessLogic
         {
             _data = p_data;
         }
-        public List<StoreFront> GetAll()
+        public List<Store> GetAll()
         {
             return _data.GetAllStores();
         }
-        public StoreFront Add(StoreFront p_store)
+        public Store Add(Store p_store)
         {
             _data.AddStore(p_store);
             return p_store;

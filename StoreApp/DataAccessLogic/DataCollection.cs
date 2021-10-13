@@ -11,19 +11,19 @@ namespace DataAccessLogic
         private const string _customerFilepath = "./../DataAccessLogic/Database/CustomerData.json";
         private string _jsonString;
 
-        public StoreFront AddStore(StoreFront p_store)
+        public Store AddStore(Store p_store)
         {
-            List<StoreFront> storeList = GetAllStores();
+            List<Store> storeList = GetAllStores();
             storeList.Add(p_store);
 
             _jsonString = JsonSerializer.Serialize(storeList);
             File.WriteAllText(_storeFilepath,_jsonString);
             return p_store;
         }
-        public List<StoreFront> GetAllStores()
+        public List<Store> GetAllStores()
         {
             _jsonString = File.ReadAllText(_storeFilepath);
-            return JsonSerializer.Deserialize<List<StoreFront>>(_jsonString);
+            return JsonSerializer.Deserialize<List<Store>>(_jsonString);
         }
 
         public Customer AddCustomer(Customer p_customer)
