@@ -1,3 +1,78 @@
 [
-    
+  {
+    "Name": "Rose\u0027s Roses",
+    "Address": "321 Baltic Ave. Orlando, FL",
+    "Products": [
+      {
+        "Name": "Roses (6)",
+        "Price": 10.99,
+        "Description": "Half a dozen roses.",
+        "Category": "Flowers"
+      },
+      {
+        "Name": "Roses (12)",
+        "Price": 19.99,
+        "Description": "A dozen roses.",
+        "Category": "Flowers"
+      }
+    ],
+    "Orders": null
+  },
+  {
+    "Name": "David\u0027s Daffodils",
+    "Address": "1600 Park Place Dr. Los Angeles, CA",
+    "Products": [
+      {
+        "Name": "Daffodils (12)",
+        "Price": 24.99,
+        "Description": "A dozen daffodils.",
+        "Category": "Flowers"
+      },
+      {
+        "Name": "Flower pot",
+        "Price": 2.99,
+        "Description": "A small flower pot",
+        "Category": "Pots"
+      }
+    ],
+    "Orders": null
+  },
+  {
+    "Name": "Lily\u0027s Lilies",
+    "Address": "3 Privit Dr Little Winding, UK",
+    "Products": [
+      {
+        "Name": "Lilies (20)",
+        "Price": 69.99,
+        "Description": "20 stems of lilies.",
+        "Category": "Flowers"
+      },
+      {
+        "Name": "Fancy Vase",
+        "Price": 74.99,
+        "Description": "A hand-painted fancy vase.",
+        "Category": "Vases"
+      }
+    ],
+    "Orders": null
+  },
+  {
+    "Name": "Steve\u0027s Sunflowers",
+    "Address": "722 Orchard Dr. Paso Robles, CA",
+    "Products": [
+      {
+        "Name": "Sunflowers (12)",
+        "Price": 12.99,
+        "Description": "A dozen sunflowers",
+        "Category": "Flowers"
+      },
+      {
+        "Name": "Roasted Sunflower Seeds",
+        "Price": 1.5,
+        "Description": "A 5.25oz bag of roasted sunflower seeds",
+        "Category": "Snacks"
+      }
+    ],
+    "Orders": null
+  }
 ]
