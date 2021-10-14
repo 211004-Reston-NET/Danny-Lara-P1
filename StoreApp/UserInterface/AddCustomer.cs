@@ -90,6 +90,7 @@ namespace UserInterface
                     
                     return MenuType.AddCustomer;
                 case "0":
+                    Console.Clear();
                     return MenuType.MainMenu;
                 default:
                     Console.WriteLine("Invalid Input!");

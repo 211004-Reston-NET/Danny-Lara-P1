@@ -42,6 +42,12 @@ namespace DataAccessLogic
             _jsonString = File.ReadAllText(_storeFilepath);
             return JsonSerializer.Deserialize<List<Store>>(_jsonString);
         }
+        public List<Store> UpdateStores(List<Store> p_stores)
+        {
+            _jsonString = JsonSerializer.Serialize(p_stores, new JsonSerializerOptions{WriteIndented=true});
+            File.WriteAllText(_storeFilepath,_jsonString);
+            return p_stores;
+        }
 
         public Customer AddCustomer(Customer p_customer)
         {
@@ -57,6 +63,13 @@ namespace DataAccessLogic
             _jsonString = File.ReadAllText(_customerFilepath);
             return JsonSerializer.Deserialize<List<Customer>>(_jsonString);
         }
+        public List<Customer> UpdateCustomers(List<Customer> p_customers)
+        {
+            _jsonString = JsonSerializer.Serialize(p_customers, new JsonSerializerOptions{WriteIndented=true});
+            File.WriteAllText(_storeFilepath,_jsonString);
+            return p_customers;
+        }
+
         static void StoreInit()
         {
             Repository storeWriter = new Repository();
@@ -150,7 +163,7 @@ namespace DataAccessLogic
             p = new Product()
             {
                 Name = "Roasted Sunflower Seeds",
-                Price = 1.50,
+                Price = 1.75,
                 Description = "A 5.25oz bag of roasted sunflower seeds",
                 Quantity = 20
             };

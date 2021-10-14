@@ -4,37 +4,40 @@ namespace Models
 {
     public class Order
     {
-        private List<LineItems> items;
-        private Store store;
-        private double totalPrice;
+        private List<LineItems> _items;
+        private Store _store;
+        private double _totalPrice;
 
         public Order()
         {
+            _items = new List<LineItems>();
+            _store = new Store();
+            _totalPrice = 0;
+        }
+        public Order(List<LineItems> p_items, Store p_store)
+        {
+            _items = p_items;
+            _store = p_store;
             double total = 0;
-            foreach (LineItems item in items)
+            foreach (LineItems item in _items)
             {
                 total += item.Product.Price;
             }
-            totalPrice = total;
+            _totalPrice = total;
         }
-        public Order(List<LineItems> p_items, Store p_store) : this()
-        {
-            items = p_items;
-            store = p_store;
-        }
-        public List<LineItems> Items { get => items; set => items = value; }
-        public Store Store { get => store; set => store = value; }
-        public double TotalPrice { get => totalPrice; set => totalPrice = value; }
+        public List<LineItems> Items { get => _items; set => _items = value; }
+        public Store Store { get => _store; set => _store = value; }
+        public double TotalPrice { get => _totalPrice; set => _totalPrice = value; }
 
         public override string ToString()
         {
-            string s = "Store: " + store.Name;
-            s += "Items:\n";
-            foreach (LineItems item in items)
+            string s = "Store: " + _store.Name;
+            s += "\nItems:\n";
+            foreach (LineItems item in _items)
             {
-                s += $"{item.Product.Name} ({item.Quantity}) at ${item.Product.Price} each\n";
+                s += $"\t{item.Product.Name} ({item.Quantity}) at ${item.Product.Price} each\n";
             }
-            s += $"Order total: ${totalPrice}";
+            s += $"Order total: ${_totalPrice}";
             return s;
         }
     }

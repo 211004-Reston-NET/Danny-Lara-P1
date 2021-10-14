@@ -31,10 +31,10 @@ namespace UserInterface
                         page = new Search(new CustomerBL(new Repository()));
                         break;
                     case MenuType.Inventory:
-                        page = new Inventory();
+                        page = new Inventory(new StoreBL(new DataAccessLogic.Repository()));
                         break;
                     case MenuType.PlaceOrder:
-                        page = new PlaceOrder();
+                        page = new PlaceOrder(new StoreBL(new DataAccessLogic.Repository()));
                         break;
                     case MenuType.OrderHistory:
                         page = new OrderHistory();

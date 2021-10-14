@@ -10,6 +10,7 @@ namespace UserInterface
         PlaceOrder,
         OrderHistory,
         Replenish,
+        StoreMenu,
         Exit
     }
     public interface IMenu

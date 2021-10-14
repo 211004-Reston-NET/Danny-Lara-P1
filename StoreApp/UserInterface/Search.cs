@@ -25,6 +25,7 @@ namespace UserInterface
                     {
                         if(name.Equals(c.Name))
                         {
+                            Console.Clear();
                             Console.WriteLine("Customer Found!");
                             Console.WriteLine(c);
                             Console.WriteLine("Press Enter to continue...");
@@ -42,6 +43,7 @@ namespace UserInterface
                     {
                         if(a.Equals(c.Address))
                         {
+                            Console.Clear();
                             Console.WriteLine("Customer Found!");
                             Console.WriteLine(c);
                             Console.WriteLine("Press Enter to continue...");
@@ -59,6 +61,7 @@ namespace UserInterface
                     {
                         if(num.Equals(c.PhoneNumber))
                         {
+                            Console.Clear();
                             Console.WriteLine("Customer Found!");
                             Console.WriteLine(c);
                             Console.WriteLine("Press Enter to continue...");
@@ -76,6 +79,7 @@ namespace UserInterface
                     {
                         if(custEmail.Equals(c.Email))
                         {
+                            Console.Clear();
                             Console.WriteLine("Customer Found!");
                             Console.WriteLine(c);
                             Console.WriteLine("Press Enter to continue...");
@@ -87,6 +91,7 @@ namespace UserInterface
                     Console.ReadLine();
                     return MenuType.Search;
                 case "0":
+                    Console.Clear();
                     return MenuType.MainMenu;
                 default:
                     return MenuType.Search;

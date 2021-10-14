@@ -8,34 +8,41 @@ namespace Models
 {
     public class Customer
     {
-        private string name;
-        private string address;
-        private string email;
-        private string phoneNumber;
-        private List<Order> orders;
+        private string _name;
+        private string _address;
+        private string _email;
+        private string _phoneNumber;
+        private List<Order> _orders;
 
-        public Customer(){}
+        public Customer()
+        {
+            _name = "";
+            _address = "";
+            _email = "";
+            _phoneNumber = "";
+            _orders = new List<Order>();
+        }
         
         public Customer(string p_name, string p_address, string p_email, string p_phone)
         {
             if(p_name == null || p_address == null || p_email == null || p_phone == null)
                 throw new InvalidDataException("Missing field for a new customer");
-            name = p_name;
-            address = p_address;
-            email = p_email;
-            phoneNumber = p_phone;
-            orders = new List<Order>();
+            _name = p_name;
+            _address = p_address;
+            _email = p_email;
+            _phoneNumber = p_phone;
+            _orders = new List<Order>();
         }
 
-        public string Name { get => name; set{
+        public string Name { get => _name; set{
             if (!Regex.IsMatch(value, @"^[A-Za-z .]+$"))
             {
                 throw new Exception("Names can only hold letters!");
             }
-            name = value;
+            _name = value;
         } }
-        public string Address { get => address; set => address = value; }
-        public string Email { get => email; set{
+        public string Address { get => _address; set => _address = value; }
+        public string Email { get => _email; set{
             try
             {
                  MailAddress m = new MailAddress(value);
@@ -44,18 +51,24 @@ namespace Models
             {
                 throw new Exception("Invalid email format!");
             }
-            email = value;
+            _email = value;
         } }
-        public string PhoneNumber { get => phoneNumber; set{
+        public string PhoneNumber { get => _phoneNumber; set{
             if(!Regex.IsMatch(value, @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"))
                 throw new Exception("Invalid phone number format");
-            phoneNumber = value;
+            _phoneNumber = value;
             } }
-        public List<Order> Orders { get => orders; set => orders = value; }
+        public List<Order> Orders { get => _orders; set => _orders = value; }
 
         public override string ToString()
         {
-            return $"Name:\t\t{Name}\nAddresss:\t{Address}\nEmail:\t\t{Email}\nPhone#:\t\t{PhoneNumber}";
+            String s = $"Name:\t\t{Name}\nAddresss:\t{Address}\nEmail:\t\t{Email}\nPhone#:\t\t{PhoneNumber}\nOrders:\t\t";
+            foreach (Order item in _orders)
+            {
+                s += item;
+                s += '\n';
+            }
+            return s;
         }
     }
 }

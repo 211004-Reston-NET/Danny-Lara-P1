@@ -6,11 +6,15 @@ namespace UserInterface
 {
     public class Inventory : IMenu
     {
-        private StoreBL _storeBL = new StoreBL(new DataAccessLogic.Repository());
+        private StoreBL _storeBL;
         private List<Store> _stores;
+        public Inventory(StoreBL p_storeBL)
+        {
+            _storeBL = p_storeBL;
+            _stores = _storeBL.GetAll();
+        }
         public MenuType Choice()
         {
-            _stores = _storeBL.GetAll();
             List<Product> products;
             Store store;
             string input = Console.ReadLine();
