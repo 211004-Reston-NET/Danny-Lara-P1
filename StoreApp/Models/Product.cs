@@ -4,19 +4,19 @@ namespace Models
 {
     public class Product
     {
-        private string name;
-        private double price;
-        private string description;
-        private string category;
+        private string _name;
+        private double _price;
+        private string _description;
+        private int _quantity;
 
-        public string Name { get => name; set => name = value; }
-        public double Price { get => price; set => price = value; }
-        public string Description { get => description; set => description = value; }
-        public string Category { get => category; set => category = value; }
+        public string Name { get => _name; set => _name = value; }
+        public double Price { get => _price; set => _price = value; }
+        public string Description { get => _description; set => _description = value; }
+        public int Quantity { get => _quantity; set => _quantity = value; }
 
         public override string ToString()
         {
-            return $"Product name:\t{Name}\nPrice:\t\t${Price}\nDescription:\t{Description}\nCategory:\t{Category}";
+            return $"Product name:\t{Name}\nPrice:\t\t${Price}\nDescription:\t{Description}\nQuantity:\t{Quantity}";
         }
     }
 }

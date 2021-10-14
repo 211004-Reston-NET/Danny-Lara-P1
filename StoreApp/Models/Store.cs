@@ -23,12 +23,6 @@ namespace Models
                 output += ", ";
             }
             output = output.Remove(output.Length-2);
-            /*output += "\nOrders: ";
-            foreach (Order order in Orders)
-            {
-                output += order;
-                output += '\n';
-            }*/
             return output;
         }
     }

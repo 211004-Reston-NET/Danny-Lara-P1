@@ -2,6 +2,8 @@
 using System;
 using Models;
 using BusinessLogic;
+using System.Collections.Generic;
+
 namespace UserInterface
 {
     public class AddCustomer : IMenu
@@ -18,6 +20,7 @@ namespace UserInterface
             switch (i)
             {
                 case "5":
+                    _cust.Orders = new List<Order>();
                     try
                     {
                          _customerBL.Add(_cust);

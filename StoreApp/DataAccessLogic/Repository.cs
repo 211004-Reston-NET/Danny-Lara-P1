@@ -72,7 +72,7 @@ namespace DataAccessLogic
                 Name = "Roses (6)",
                 Price = 10.99,
                 Description = "Half a dozen roses.",
-                Category = "Flowers"
+                Quantity = 20
             };
             s1.Products.Add(p);
             p = new Product()
@@ -80,7 +80,7 @@ namespace DataAccessLogic
                 Name = "Roses (12)",
                 Price = 19.99,
                 Description = "A dozen roses.",
-                Category = "Flowers"
+                Quantity = 20
             };
             s1.Products.Add(p);
             storeWriter.AddStore(s1);
@@ -96,7 +96,7 @@ namespace DataAccessLogic
                 Name = "Daffodils (12)",
                 Price = 24.99,
                 Description = "A dozen daffodils.",
-                Category = "Flowers"
+                Quantity = 20
             };
             s2.Products.Add(p);
             p = new Product()
@@ -104,7 +104,7 @@ namespace DataAccessLogic
                 Name = "Flower pot",
                 Price = 2.99,
                 Description = "A small flower pot",
-                Category = "Pots"
+                Quantity = 20
             };
             s2.Products.Add(p);
             storeWriter.AddStore(s2);
@@ -120,7 +120,7 @@ namespace DataAccessLogic
                 Name = "Lilies (20)",
                 Price = 69.99,
                 Description = "20 stems of lilies.",
-                Category = "Flowers"
+                Quantity = 20
             };
             s3.Products.Add(p);
             p = new Product()
@@ -128,7 +128,7 @@ namespace DataAccessLogic
                 Name = "Fancy Vase",
                 Price = 74.99,
                 Description = "A hand-painted fancy vase.",
-                Category = "Vases"
+                Quantity = 20
             };
             s3.Products.Add(p);
             storeWriter.AddStore(s3);
@@ -144,7 +144,7 @@ namespace DataAccessLogic
                 Name = "Sunflowers (12)",
                 Price = 12.99,
                 Description = "A dozen sunflowers",
-                Category = "Flowers"
+                Quantity = 20
             };
             s4.Products.Add(p);
             p = new Product()
@@ -152,7 +152,7 @@ namespace DataAccessLogic
                 Name = "Roasted Sunflower Seeds",
                 Price = 1.50,
                 Description = "A 5.25oz bag of roasted sunflower seeds",
-                Category = "Snacks"
+                Quantity = 20
             };
             s4.Products.Add(p);
             storeWriter.AddStore(s4);
