@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BusinessLogic;
 using Models;
 
@@ -8,17 +9,40 @@ namespace UserInterface
     {
         private StoreBL _storeBL;
         private Store _store;
+        private List<LineItems> _orderProducts;
         private Order _order;
         
         public StoreOrderMenu(StoreBL p_storeBL, Store p_store)
         {
             _storeBL = p_storeBL;
             _store = p_store;
+            _orderProducts = new List<LineItems>();
             _order = new Order();
+            _order.Store = p_store;
         }
         public MenuType Choice()
         {
-            throw new System.NotImplementedException();
+            string input = Console.ReadLine();
+            if(input == "0")
+                return MenuType.PlaceOrder;
+            if(input == "1")
+            {
+                _order.Items = _orderProducts;
+                //TODO: Insert logic for updating StoreData.json file
+                Console.WriteLine("Order placed!\nPress Enter to return to the Main Menu...");
+                Console.ReadLine();
+                return MenuType.MainMenu;
+            }
+            try
+            {
+                //TODO: Insert logic for comparing the input to expected menu input
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Invalid input!\nPress Enter to continue...");
+                return MenuType.StoreOrderMenu;
+            }
+            return MenuType.MainMenu;
         }
 
         public void Menu()
@@ -31,7 +55,7 @@ namespace UserInterface
             int menuIndex = 2;
             foreach (Product p in _store.Products)
             {
-                Console.WriteLine($"[{menuIndex}] - {p.Name} -> {p.Price}");
+                Console.WriteLine($"[{menuIndex}] - {p.Name} - {p.Price}");
                 menuIndex++;
             }
         }
