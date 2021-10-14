@@ -17,16 +17,10 @@ namespace Models
             }
             totalPrice = total;
         }
-        public Order(List<LineItems> p_items, Store p_store)
+        public Order(List<LineItems> p_items, Store p_store) : this()
         {
             items = p_items;
             store = p_store;
-            double total = 0;
-            foreach (LineItems item in items)
-            {
-                total += item.Product.Price;
-            }
-            totalPrice = total;
         }
         public List<LineItems> Items { get => items; set => items = value; }
         public Store Store { get => store; set => store = value; }

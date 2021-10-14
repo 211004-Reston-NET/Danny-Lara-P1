@@ -18,26 +18,73 @@ namespace UserInterface
             switch (i)
             {
                 case "5":
-                    _customerBL.Add(_cust);
+                    try
+                    {
+                         _customerBL.Add(_cust);
+                    }
+                    catch (System.Exception)
+                    {
+                        Console.WriteLine("You must have all fields to add customer!\nPress Enter to continue...");
+                        Console.ReadLine();
+                        return MenuType.AddCustomer;
+                    }
                     Console.WriteLine("Customer added!\nPress Enter to continue...");
                     Console.ReadLine();
                     Console.Clear();
                     return MenuType.MainMenu;
                 case "4":
                     Console.WriteLine("Enter customer name:");
-                    _cust.Name = Console.ReadLine();
+                    try
+                    {
+                        _cust.Name = Console.ReadLine();
+                    }
+                    catch (System.Exception)
+                    {
+                        Console.WriteLine("Invalid name format! Names contain only letters!\nPress Enter to continue...");
+                        Console.ReadLine();
+                        return MenuType.AddCustomer;
+                    }
+                    
                     return MenuType.AddCustomer;
                 case "3":
                     Console.WriteLine("Enter address:");
-                    _cust.Address = Console.ReadLine();
+                    try
+                    {
+                        _cust.Address = Console.ReadLine();
+                    }
+                    catch (System.Exception)
+                    {
+                        Console.WriteLine("Invalid address format!\nPress Enter to continue...");
+                        Console.ReadLine();
+                        return MenuType.AddCustomer;
+                    }
                     return MenuType.AddCustomer;
                 case "2":
                     Console.WriteLine("Enter phone number:");
-                    _cust.PhoneNumber = Console.ReadLine();
+                    try
+                    {
+                        _cust.PhoneNumber = Console.ReadLine();                         
+                    }
+                    catch (System.Exception)
+                    {
+                        Console.WriteLine("Invalid phone number!\nUse format (***)***-****\nPress Enter to continue...");
+                        Console.ReadLine();
+                        return MenuType.AddCustomer;
+                    }
                     return MenuType.AddCustomer;
                 case "1":
                     Console.WriteLine("Enter email address:");
-                    _cust.Email = Console.ReadLine();
+                    try
+                    {
+                        _cust.Email = Console.ReadLine();
+                    }
+                    catch (System.Exception)
+                    {
+                        Console.WriteLine("Invalid email format!\nPress Enter to continue...");
+                        Console.ReadLine();
+                        return MenuType.AddCustomer;
+                    }
+                    
                     return MenuType.AddCustomer;
                 case "0":
                     return MenuType.MainMenu;
