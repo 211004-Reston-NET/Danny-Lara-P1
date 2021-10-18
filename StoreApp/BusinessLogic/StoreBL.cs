@@ -20,5 +20,9 @@ namespace BusinessLogic
             _data.AddStore(p_store);
             return p_store;
         }
+        public void Update(List<Store> p_stores)
+        {
+            _data.UpdateStores(p_stores);
+        }
     }
 }

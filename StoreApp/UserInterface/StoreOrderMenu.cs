@@ -9,6 +9,7 @@ namespace UserInterface
     {
         private StoreBL _storeBL;
         private Store _store;
+        private List<Store> _allStores;
         private List<LineItems> _orderProducts;
         private Order _order;
         
@@ -19,6 +20,7 @@ namespace UserInterface
             _orderProducts = new List<LineItems>();
             _order = new Order();
             _order.Store = p_store;
+            _allStores = _storeBL.GetAll();
         }
         public MenuType Choice()
         {
@@ -28,7 +30,14 @@ namespace UserInterface
             if(input == "1")
             {
                 _order.Items = _orderProducts;
-                //TODO: Insert logic for updating StoreData.json file
+                _order.Store = _store;
+                _order.UpdatePrice();
+                foreach (Store s in _allStores)
+                {
+                    if(s.Name.Equals(_store.Name))
+                        s.Orders.Add(_order);
+                }
+                _storeBL.Update(_allStores);
                 Console.WriteLine("Order placed!\nPress Enter to return to the Main Menu...");
                 Console.ReadLine();
                 return MenuType.MainMenu;

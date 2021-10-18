@@ -29,6 +29,16 @@ namespace Models
         public Store Store { get => _store; set => _store = value; }
         public double TotalPrice { get => _totalPrice; set => _totalPrice = value; }
 
+        public void UpdatePrice()
+        {
+            double total = 0;
+            foreach (LineItems item in _items)
+            {
+                total += item.Product.Price;
+            }
+            _totalPrice = total;
+        }
+
         public override string ToString()
         {
             string s = "Store: " + _store.Name;

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using BusinessLogic;
 using DataAccessLogic;
-using Models;
 
 namespace UserInterface
 {
@@ -31,10 +29,10 @@ namespace UserInterface
                         page = new Search(new CustomerBL(new Repository()));
                         break;
                     case MenuType.Inventory:
-                        page = new Inventory(new StoreBL(new DataAccessLogic.Repository()));
+                        page = new Inventory(new StoreBL(new Repository()));
                         break;
                     case MenuType.PlaceOrder:
-                        page = new PlaceOrder(new StoreBL(new DataAccessLogic.Repository()));
+                        page = new PlaceOrder(new StoreBL(new Repository()));
                         break;
                     case MenuType.OrderHistory:
                         page = new OrderHistory();
