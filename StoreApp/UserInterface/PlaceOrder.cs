@@ -19,31 +19,52 @@ namespace UserInterface
             string input = Console.ReadLine();
             IMenu page = new MainMenu();
             MenuType m = new MenuType();
+            bool loop = true;
             switch (input)
             {
                 case "0":
                     page = new StoreOrderMenu(_storeBL, _stores[0]);
-                    page.Menu();
-                    m =page.Choice();
-                    Console.Clear();
+                    while (loop)
+                    {
+                        page.Menu();
+                        m =page.Choice();
+                        Console.Clear();
+                        if (m != MenuType.StoreOrderMenu)
+                            loop = false;
+                    }
                     return m;
                 case "1":
                     page = new StoreOrderMenu(_storeBL, _stores[1]);
-                    page.Menu();
-                    m =page.Choice();
-                    Console.Clear();
+                    while (loop)
+                    {
+                        page.Menu();
+                        m =page.Choice();
+                        Console.Clear();
+                        if (m != MenuType.StoreOrderMenu)
+                            loop = false;
+                    }
                     return m;
                 case "2":
                     page = new StoreOrderMenu(_storeBL, _stores[2]);
-                    page.Menu();
-                    m =page.Choice();
-                    Console.Clear();
+                    while (loop)
+                    {
+                        page.Menu();
+                        m =page.Choice();
+                        Console.Clear();
+                        if (m != MenuType.StoreOrderMenu)
+                            loop = false;
+                    }
                     return m;
                 case "3":
                     page = new StoreOrderMenu(_storeBL, _stores[3]);
-                    page.Menu();
-                    m =page.Choice();
-                    Console.Clear();
+                    while (loop)
+                    {
+                        page.Menu();
+                        m =page.Choice();
+                        Console.Clear();
+                        if (m != MenuType.StoreOrderMenu)
+                            loop = false;
+                    }
                     return m;
                 case "4":
                     Console.Clear();

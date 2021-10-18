@@ -34,7 +34,7 @@ namespace Models
             double total = 0;
             foreach (LineItems item in _items)
             {
-                total += item.Product.Price;
+                total += item.Product.Price * item.Quantity;
             }
             _totalPrice = total;
         }

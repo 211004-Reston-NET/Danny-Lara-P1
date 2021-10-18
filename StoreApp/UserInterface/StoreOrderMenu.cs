@@ -44,14 +44,27 @@ namespace UserInterface
             }
             try
             {
-                //TODO: Insert logic for comparing the input to expected menu input
+                int j = Int32.Parse(input);
+                Console.WriteLine($"How many {_store.Products[j-2].Name} would you like?");
+                int quantity = Int32.Parse(Console.ReadLine());
+                if (_store.Products[j-2].Quantity < quantity)
+                {
+                    Console.WriteLine("Not enough stock for that quantity!");
+                    Console.WriteLine($"Please enter an amount of {_store.Products[j-2].Quantity} or less...");
+                    quantity = Int32.Parse(Console.ReadLine());
+                }
+                _orderProducts.Add(new LineItems(_store.Products[j-2], quantity));
+                _store.Products[j-2].Quantity -= quantity;
+                _order.Items = _orderProducts;
+                _order.UpdatePrice();
+                return MenuType.StoreOrderMenu;
             }
             catch (System.Exception)
             {
                 Console.WriteLine("Invalid input!\nPress Enter to continue...");
                 return MenuType.StoreOrderMenu;
             }
-            return MenuType.MainMenu;
+            //return MenuType.MainMenu;
         }
 
         public void Menu()

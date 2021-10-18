@@ -34,6 +34,9 @@ namespace UserInterface
                     case MenuType.PlaceOrder:
                         page = new PlaceOrder(new StoreBL(new Repository()));
                         break;
+                    /*case MenuType.StoreOrderMenu:
+                        page = new StoreOrderMenu(new StoreBL(new Repository()));
+                        break;*/
                     case MenuType.OrderHistory:
                         page = new OrderHistory();
                         break;
