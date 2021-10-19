@@ -42,11 +42,25 @@ namespace DataAccessLogic
             _jsonString = File.ReadAllText(_storeFilepath);
             return JsonSerializer.Deserialize<List<Store>>(_jsonString);
         }
-        public List<Store> UpdateStores(List<Store> p_stores)
+        public Store UpdateStore(Store p_store)
         {
-            _jsonString = JsonSerializer.Serialize(p_stores, new JsonSerializerOptions{WriteIndented=true});
+            List<Store> stores = GetAllStores();
+            for (int i = 0; i < stores.Count; i++)
+            {
+                if (stores[i].Name.Equals(p_store.Name))
+                    stores[i] = p_store;
+            }
+            var options = new JsonSerializerOptions()
+            {
+                WriteIndented = true,
+                MaxDepth = 0,
+                IgnoreNullValues = true,
+                IgnoreReadOnlyProperties = true,
+                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+            };
+            _jsonString = JsonSerializer.Serialize(stores, options);
             File.WriteAllText(_storeFilepath,_jsonString);
-            return p_stores;
+            return p_store;
         }
 
         public Customer AddCustomer(Customer p_customer)

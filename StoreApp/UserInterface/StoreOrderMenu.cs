@@ -31,20 +31,8 @@ namespace UserInterface
                 return MenuType.PlaceOrder;
             if(input == "1")
             {
-                //_order.Items = _orderProducts;
-                //_order.UpdatePrice();
-                for (int i = 0; i < _allStores.Count; i++)
-                {
-                    if (_allStores[i].Name.Equals(_store.Name))
-                        _allStores[i].Orders.Add(_order);
-                }
-                /*Console.WriteLine(_store);
-                Console.WriteLine("===================");
-                Console.WriteLine(_order);
-                Console.WriteLine("===================");
-                Console.WriteLine(_store.Orders);
-                _store.Orders.Add(_order);*/
-                //_storeBL.Update(_allStores);
+                _store.Orders.Add(_order);
+                _storeBL.Update(_store);
                 Console.WriteLine("Order placed!\nPress Enter to return to the Main Menu...");
                 Console.ReadLine();
                 return MenuType.MainMenu;
@@ -60,9 +48,8 @@ namespace UserInterface
                     Console.WriteLine($"Please enter an amount of {_store.Products[j-2].Quantity} or less...");
                     quantity = Int32.Parse(Console.ReadLine());
                 }
-                _orderProducts.Add(new LineItems(_store.Products[j-2], quantity));
+                _order.Items.Add(new LineItems(_store.Products[j-2], quantity));
                 _store.Products[j-2].Quantity -= quantity;
-                _order.Items = _orderProducts;
                 _order.UpdatePrice();
                 return MenuType.StoreOrderMenu;
             }
@@ -73,7 +60,6 @@ namespace UserInterface
                 Console.Clear();
                 return MenuType.StoreOrderMenu;
             }
-            //return MenuType.MainMenu;
         }
 
         public void Menu()
