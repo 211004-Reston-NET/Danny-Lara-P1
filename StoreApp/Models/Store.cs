@@ -1,3 +1,4 @@
+using System.Reflection.Emit;
 using System.Collections.Generic;
 
 namespace Models
@@ -8,6 +9,13 @@ namespace Models
         private string _address;
         private List<Product> _products;
         private List<Order> _orders;
+        public Store()
+        {
+            _name = "";
+            _address = "";
+            _products = new List<Product>();
+            _orders = new List<Order>();
+        }
 
         public string Name { get => _name; set => _name = value; }
         public string Address { get => _address; set => _address = value; }

@@ -9,18 +9,20 @@ namespace UserInterface
     {
         private StoreBL _storeBL;
         private Store _store;
-        private List<Store> _allStores;
+        private static List<Store> _allStores;
         private List<LineItems> _orderProducts;
         private Order _order;
         
-        public StoreOrderMenu(StoreBL p_storeBL, Store p_store)
+        public StoreOrderMenu(StoreBL p_storeBL, int p_storeIndex)
         {
             _storeBL = p_storeBL;
-            _store = p_store;
             _orderProducts = new List<LineItems>();
             _order = new Order();
-            _order.Store = p_store;
             _allStores = _storeBL.GetAll();
+            _store = _allStores[p_storeIndex];
+            _order.Store = _store;
+            if (_store.Orders == null)
+                _store.Orders = new List<Order>();
         }
         public MenuType Choice()
         {
@@ -29,15 +31,20 @@ namespace UserInterface
                 return MenuType.PlaceOrder;
             if(input == "1")
             {
-                _order.Items = _orderProducts;
-                _order.Store = _store;
-                _order.UpdatePrice();
-                foreach (Store s in _allStores)
+                //_order.Items = _orderProducts;
+                //_order.UpdatePrice();
+                for (int i = 0; i < _allStores.Count; i++)
                 {
-                    if(s.Name.Equals(_store.Name))
-                        s.Orders.Add(_order);
+                    if (_allStores[i].Name.Equals(_store.Name))
+                        _allStores[i].Orders.Add(_order);
                 }
-                _storeBL.Update(_allStores);
+                /*Console.WriteLine(_store);
+                Console.WriteLine("===================");
+                Console.WriteLine(_order);
+                Console.WriteLine("===================");
+                Console.WriteLine(_store.Orders);
+                _store.Orders.Add(_order);*/
+                //_storeBL.Update(_allStores);
                 Console.WriteLine("Order placed!\nPress Enter to return to the Main Menu...");
                 Console.ReadLine();
                 return MenuType.MainMenu;
@@ -62,6 +69,8 @@ namespace UserInterface
             catch (System.Exception)
             {
                 Console.WriteLine("Invalid input!\nPress Enter to continue...");
+                Console.ReadLine();
+                Console.Clear();
                 return MenuType.StoreOrderMenu;
             }
             //return MenuType.MainMenu;
@@ -77,7 +86,7 @@ namespace UserInterface
             int menuIndex = 2;
             foreach (Product p in _store.Products)
             {
-                Console.WriteLine($"[{menuIndex}] - {p.Name} - {p.Price}");
+                Console.WriteLine($"[{menuIndex}] - {p.Name} - {p.Price.ToString("C")}");
                 menuIndex++;
             }
         }

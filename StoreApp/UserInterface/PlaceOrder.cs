@@ -23,7 +23,7 @@ namespace UserInterface
             switch (input)
             {
                 case "0":
-                    page = new StoreOrderMenu(_storeBL, _stores[0]);
+                    page = new StoreOrderMenu(_storeBL, 0);
                     while (loop)
                     {
                         page.Menu();
@@ -34,7 +34,7 @@ namespace UserInterface
                     }
                     return m;
                 case "1":
-                    page = new StoreOrderMenu(_storeBL, _stores[1]);
+                    page = new StoreOrderMenu(_storeBL, 1);
                     while (loop)
                     {
                         page.Menu();
@@ -45,7 +45,7 @@ namespace UserInterface
                     }
                     return m;
                 case "2":
-                    page = new StoreOrderMenu(_storeBL, _stores[2]);
+                    page = new StoreOrderMenu(_storeBL, 2);
                     while (loop)
                     {
                         page.Menu();
@@ -56,7 +56,7 @@ namespace UserInterface
                     }
                     return m;
                 case "3":
-                    page = new StoreOrderMenu(_storeBL, _stores[3]);
+                    page = new StoreOrderMenu(_storeBL, 3);
                     while (loop)
                     {
                         page.Menu();

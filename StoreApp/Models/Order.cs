@@ -21,7 +21,7 @@ namespace Models
             double total = 0;
             foreach (LineItems item in _items)
             {
-                total += item.Product.Price;
+                total += item.Product.Price * item.Quantity;
             }
             _totalPrice = total;
         }
@@ -45,9 +45,9 @@ namespace Models
             s += "\nItems:\n";
             foreach (LineItems item in _items)
             {
-                s += $"\t{item.Product.Name} ({item.Quantity}) at ${item.Product.Price} each\n";
+                s += $"\t{item.Product.Name} ({item.Quantity}) at {item.Product.Price.ToString("C")} each\n";
             }
-            s += $"Order total: ${_totalPrice}";
+            s += $"Order total: {_totalPrice.ToString("C")}";
             return s;
         }
     }
