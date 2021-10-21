@@ -33,6 +33,7 @@ namespace UserInterface
 
         public void Menu()
         {
+            Console.WriteLine("Welcome to the Flower Shop App!");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("[1] - Add a customer");
             Console.WriteLine("[2] - Search for a customer");
