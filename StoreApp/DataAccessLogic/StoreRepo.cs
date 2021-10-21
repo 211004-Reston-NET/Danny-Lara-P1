@@ -5,13 +5,12 @@ using Models;
 
 namespace DataAccessLogic
 {
-    public class Repository
+    public class StoreRepo : IRepository
     {
         private const string _storeFilepath = "./../DataAccessLogic/Database/StoreData.json";
-        private const string _customerFilepath = "./../DataAccessLogic/Database/CustomerData.json";
         private string _jsonString;
 
-        public Repository()
+        public StoreRepo()
         {
             if(!File.Exists(_storeFilepath))
             {
@@ -19,12 +18,6 @@ namespace DataAccessLogic
                 f.Close();
                 File.WriteAllText(_storeFilepath, "[]");
                 StoreInit();
-            }
-            if(!File.Exists(_customerFilepath))
-            {
-                FileStream f = File.Create(_customerFilepath);
-                f.Close();
-                File.WriteAllText(_customerFilepath, "[]");
             }
         }
 
@@ -62,21 +55,6 @@ namespace DataAccessLogic
             File.WriteAllText(_storeFilepath,_jsonString);
             return p_store;
         }
-
-        public Customer AddCustomer(Customer p_customer)
-        {
-            List<Customer> customerList = GetAllCustomers();
-            customerList.Add(p_customer);
-
-            _jsonString = JsonSerializer.Serialize(customerList, new JsonSerializerOptions{WriteIndented=true});
-            File.WriteAllText(_customerFilepath,_jsonString);
-            return p_customer;
-        }
-        public List<Customer> GetAllCustomers()
-        {
-            _jsonString = File.ReadAllText(_customerFilepath);
-            return JsonSerializer.Deserialize<List<Customer>>(_jsonString);
-        }
         public List<Customer> UpdateCustomers(List<Customer> p_customers)
         {
             _jsonString = JsonSerializer.Serialize(p_customers, new JsonSerializerOptions{WriteIndented=true});
@@ -86,7 +64,7 @@ namespace DataAccessLogic
 
         static void StoreInit()
         {
-            Repository storeWriter = new Repository();
+            StoreRepo storeWriter = new StoreRepo();
 
             Store s1 = new Store()
             {
@@ -183,6 +161,31 @@ namespace DataAccessLogic
             };
             s4.Products.Add(p);
             storeWriter.AddStore(s4);
+        }
+
+        public object Add(object p_newObject)
+        {
+            List<object> list = GetAll();
+            List<Store> storeList = new List<Store>();
+            foreach (object item in list)
+            {
+                storeList.Add((Store)item);
+            }
+            storeList.Add((Store)p_newObject);
+
+            _jsonString = JsonSerializer.Serialize(storeList, new JsonSerializerOptions{WriteIndented=true});
+            File.WriteAllText(_storeFilepath,_jsonString);
+            return p_newObject;
+        }
+
+        public List<object> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Update(List<object> p_newList)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

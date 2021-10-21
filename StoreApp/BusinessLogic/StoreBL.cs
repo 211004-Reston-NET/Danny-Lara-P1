@@ -6,8 +6,8 @@ namespace BusinessLogic
 {
     public class StoreBL //: IBL
     {
-        private Repository _data;
-        public StoreBL(Repository p_data)
+        private StoreRepo _data;
+        public StoreBL(StoreRepo p_data)
         {
             _data = p_data;
         }

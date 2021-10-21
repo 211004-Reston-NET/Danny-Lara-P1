@@ -1,144 +1,78 @@
-{
-  "$id": "1",
-  "$values": [
-    {
-      "$id": "2",
-      "Name": "Rose\u0027s Roses",
-      "Address": "321 Baltic Ave. Orlando, FL",
-      "Products": {
-        "$id": "3",
-        "$values": [
-          {
-            "$id": "4",
-            "Name": "Roses (6)",
-            "Price": 10.99,
-            "Description": "Half a dozen roses.",
-            "Quantity": 15
-          },
-          {
-            "$id": "5",
-            "Name": "Roses (12)",
-            "Price": 19.99,
-            "Description": "A dozen roses.",
-            "Quantity": 18
-          }
-        ]
+[
+  {
+    "Name": "Rose\u0027s Roses",
+    "Address": "321 Baltic Ave. Orlando, FL",
+    "Products": [
+      {
+        "Name": "Roses (6)",
+        "Price": 10.99,
+        "Description": "Half a dozen roses.",
+        "Quantity": 20
       },
-      "Orders": {
-        "$id": "6",
-        "$values": [
-          {
-            "$id": "7",
-            "Items": {
-              "$id": "8",
-              "$values": [
-                {
-                  "$id": "9",
-                  "Product": {
-                    "$ref": "4"
-                  },
-                  "Quantity": 5
-                },
-                {
-                  "$id": "10",
-                  "Product": {
-                    "$ref": "5"
-                  },
-                  "Quantity": 2
-                }
-              ]
-            },
-            "Store": {
-              "$ref": "2"
-            },
-            "TotalPrice": 94.93
-          }
-        ]
+      {
+        "Name": "Roses (12)",
+        "Price": 19.99,
+        "Description": "A dozen roses.",
+        "Quantity": 20
       }
-    },
-    {
-      "$id": "11",
-      "Name": "David\u0027s Daffodils",
-      "Address": "1600 Park Place Dr. Los Angeles, CA",
-      "Products": {
-        "$id": "12",
-        "$values": [
-          {
-            "$id": "13",
-            "Name": "Daffodils (12)",
-            "Price": 24.99,
-            "Description": "A dozen daffodils.",
-            "Quantity": 20
-          },
-          {
-            "$id": "14",
-            "Name": "Flower pot",
-            "Price": 2.99,
-            "Description": "A small flower pot",
-            "Quantity": 20
-          }
-        ]
+    ],
+    "Orders": []
+  },
+  {
+    "Name": "David\u0027s Daffodils",
+    "Address": "1600 Park Place Dr. Los Angeles, CA",
+    "Products": [
+      {
+        "Name": "Daffodils (12)",
+        "Price": 24.99,
+        "Description": "A dozen daffodils.",
+        "Quantity": 20
       },
-      "Orders": {
-        "$id": "15",
-        "$values": []
+      {
+        "Name": "Flower pot",
+        "Price": 2.99,
+        "Description": "A small flower pot",
+        "Quantity": 20
       }
-    },
-    {
-      "$id": "16",
-      "Name": "Lily\u0027s Lilies",
-      "Address": "3 Privit Dr Little Winding, UK",
-      "Products": {
-        "$id": "17",
-        "$values": [
-          {
-            "$id": "18",
-            "Name": "Lilies (20)",
-            "Price": 69.99,
-            "Description": "20 stems of lilies.",
-            "Quantity": 20
-          },
-          {
-            "$id": "19",
-            "Name": "Fancy Vase",
-            "Price": 74.99,
-            "Description": "A hand-painted fancy vase.",
-            "Quantity": 20
-          }
-        ]
+    ],
+    "Orders": []
+  },
+  {
+    "Name": "Lily\u0027s Lilies",
+    "Address": "3 Privit Dr Little Winding, UK",
+    "Products": [
+      {
+        "Name": "Lilies (20)",
+        "Price": 69.99,
+        "Description": "20 stems of lilies.",
+        "Quantity": 20
       },
-      "Orders": {
-        "$id": "20",
-        "$values": []
+      {
+        "Name": "Fancy Vase",
+        "Price": 74.99,
+        "Description": "A hand-painted fancy vase.",
+        "Quantity": 20
       }
-    },
-    {
-      "$id": "21",
-      "Name": "Steve\u0027s Sunflowers",
-      "Address": "722 Orchard Dr. Paso Robles, CA",
-      "Products": {
-        "$id": "22",
-        "$values": [
-          {
-            "$id": "23",
-            "Name": "Sunflowers (12)",
-            "Price": 12.99,
-            "Description": "A dozen sunflowers",
-            "Quantity": 20
-          },
-          {
-            "$id": "24",
-            "Name": "Roasted Sunflower Seeds",
-            "Price": 1.75,
-            "Description": "A 5.25oz bag of roasted sunflower seeds",
-            "Quantity": 20
-          }
-        ]
+    ],
+    "Orders": []
+  },
+  {
+    "Name": "Steve\u0027s Sunflowers",
+    "Address": "722 Orchard Dr. Paso Robles, CA",
+    "Products": [
+      {
+        "Name": "Sunflowers (12)",
+        "Price": 12.99,
+        "Description": "A dozen sunflowers",
+        "Quantity": 20
       },
-      "Orders": {
-        "$id": "25",
-        "$values": []
+      {
+        "Name": "Roasted Sunflower Seeds",
+        "Price": 1.75,
+        "Description": "A 5.25oz bag of roasted sunflower seeds",
+        "Quantity": 20
       }
-    }
-  ]
-}
+    ],
+    "Orders": []
+  }
+]

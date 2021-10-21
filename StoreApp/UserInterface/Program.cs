@@ -23,16 +23,16 @@ namespace UserInterface
                         page = new MainMenu();
                         break;
                     case MenuType.AddCustomer:
-                        page = new AddCustomer(new CustomerBL(new Repository()));
+                        page = new AddCustomer(new CustomerBL(new StoreRepo()));
                         break;
                     case MenuType.Search:
-                        page = new Search(new CustomerBL(new Repository()));
+                        page = new Search(new CustomerBL(new StoreRepo()));
                         break;
                     case MenuType.Inventory:
-                        page = new Inventory(new StoreBL(new Repository()));
+                        page = new Inventory(new StoreBL(new StoreRepo()));
                         break;
                     case MenuType.PlaceOrder:
-                        page = new PlaceOrder(new StoreBL(new Repository()));
+                        page = new PlaceOrder(new StoreBL(new StoreRepo()));
                         break;
                     /*case MenuType.StoreOrderMenu:
                         page = new StoreOrderMenu(new StoreBL(new Repository()));

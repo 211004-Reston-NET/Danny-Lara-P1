@@ -6,8 +6,8 @@ namespace BusinessLogic
 {
     public class CustomerBL
     {
-        private Repository _data;
-        public CustomerBL(Repository p_data)
+        private StoreRepo _data;
+        public CustomerBL(StoreRepo p_data)
         {
             _data = p_data;
         }
