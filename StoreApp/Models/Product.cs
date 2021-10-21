@@ -12,7 +12,11 @@ namespace Models
         public string Name { get => _name; set => _name = value; }
         public double Price { get => _price; set => _price = value; }
         public string Description { get => _description; set => _description = value; }
-        public int Quantity { get => _quantity; set => _quantity = value; }
+        public int Quantity { get => _quantity; set{
+            if (value < 0)
+                throw new System.Exception("Cannot add a negative quantity!");
+            _quantity = value;
+        } }
 
         public override string ToString()
         {

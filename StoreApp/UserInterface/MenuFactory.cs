@@ -20,7 +20,7 @@ namespace UserInterface
                 case MenuType.PlaceOrder:
                     return new PlaceOrder(new StoreBL(new StoreRepo()));
                 case MenuType.Replenish:
-                    return new Replenish();
+                    return new Replenish(new StoreBL(new StoreRepo()));
                 case MenuType.Search:
                     return new Search(new CustomerBL(new CustomerRepo()));
                 default:
