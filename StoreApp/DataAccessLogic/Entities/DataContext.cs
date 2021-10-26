@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace DataAccessLogic.Entities
 {
-    public partial class _211004RestonNetLaraContext : DbContext
+    public partial class DataContext : DbContext
     {
-        public _211004RestonNetLaraContext()
+        public DataContext()
         {
         }
 
-        public _211004RestonNetLaraContext(DbContextOptions<_211004RestonNetLaraContext> options)
+        public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
         }
