@@ -56,6 +56,7 @@ namespace DataAccessLogic
                     CustPhoneNumber = p_cust.PhoneNumber
                 }
             );
+            _context.SaveChanges();
             return p_cust;
         }
         public List<Model.Customer> GetAllCustomers()
