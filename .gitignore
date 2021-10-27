@@ -46,3 +46,5 @@ RestaurantReview/RRUI/AddRestaurant.cs
 RestaurantReview/RRUI/CurrentRestaurant.cs
 RestaurantReview/RRUI/IFactory.cs
 RestaurantReview/RRUI/MenuFactory.cs
+RestaurantReview/RRTest/RRTest.csproj
+RestaurantReview/RRTest/UnitTest1.cs

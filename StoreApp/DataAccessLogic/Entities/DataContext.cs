@@ -52,7 +52,11 @@ namespace DataAccessLogic.Entities
                     .IsUnicode(false)
                     .HasColumnName("cust_name");
 
-                entity.Property(e => e.CustPhoneNumber).HasColumnName("cust_phone_number");
+                entity.Property(e => e.CustPhoneNumber)
+                    .IsRequired()
+                    .HasMaxLength(15)
+                    .IsUnicode(false)
+                    .HasColumnName("cust_phone_number");
             });
 
             modelBuilder.Entity<LineItem>(entity =>
@@ -70,11 +74,13 @@ namespace DataAccessLogic.Entities
                 entity.HasOne(d => d.OrderNumberNavigation)
                     .WithMany()
                     .HasForeignKey(d => d.OrderNumber)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__lineItem__order___17F790F9");
 
                 entity.HasOne(d => d.Product)
                     .WithMany()
                     .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__lineItem__produc__18EBB532");
             });
 
@@ -98,11 +104,13 @@ namespace DataAccessLogic.Entities
                 entity.HasOne(d => d.Cust)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__orders__cust_id__151B244E");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.StoreId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__orders__store_id__160F4887");
             });
 
@@ -118,7 +126,6 @@ namespace DataAccessLogic.Entities
                     .HasColumnName("product_description");
 
                 entity.Property(e => e.ProductName)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("product_name");
@@ -134,6 +141,7 @@ namespace DataAccessLogic.Entities
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.StoreId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__product__store_i__123EB7A3");
             });
 

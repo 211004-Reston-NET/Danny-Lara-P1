@@ -8,6 +8,7 @@ namespace Models
 {
     public class Customer
     {
+        private int _custID;
         private string _name;
         private string _address;
         private string _email;
@@ -59,6 +60,7 @@ namespace Models
             _phoneNumber = value;
             } }
         public List<Order> Orders { get => _orders; set => _orders = value; }
+        public int CustID { get => _custID; set => _custID = value; }
 
         public override string ToString()
         {

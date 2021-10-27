@@ -5,6 +5,7 @@ namespace Models
 {
     public class Store
     {
+        private int _storeID;
         private string _name;
         private string _address;
         private List<Product> _products;
@@ -21,6 +22,7 @@ namespace Models
         public string Address { get => _address; set => _address = value; }
         public List<Product> Products { get => _products; set => _products = value; }
         public List<Order> Orders { get => _orders; set => _orders = value; }
+        public int StoreID { get => _storeID; set => _storeID = value; }
 
         public override string ToString()
         {

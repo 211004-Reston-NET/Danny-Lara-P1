@@ -44,11 +44,12 @@ namespace UserInterface
                 {
                     if (restock < 0)
                         throw new Exception("Resock must be a possitive number!");
-                   _allProducts[j-1].Quantity += restock;
-                   Console.WriteLine($"{_allProducts[j-1].Name} has been restocked! There are now {_allProducts[j-1].Quantity}.");
-                   Console.WriteLine("Press Enter to return to the main menu...");
-                   Console.ReadLine();
-                return MenuType.MainMenu;
+                    _allProducts[j-1].Quantity += restock;
+                    //_storeBL.Update()-->Need to find a way to get the store
+                    Console.WriteLine($"{_allProducts[j-1].Name} has been restocked! There are now {_allProducts[j-1].Quantity}.");
+                    Console.WriteLine("Press Enter to return to the main menu...");
+                    Console.ReadLine();
+                    return MenuType.MainMenu;
                 }
                 catch (System.Exception)
                 {

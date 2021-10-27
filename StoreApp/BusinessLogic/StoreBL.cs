@@ -6,8 +6,8 @@ namespace BusinessLogic
 {
     public class StoreBL //: IBL
     {
-        private StoreRepo _data;
-        public StoreBL(StoreRepo p_data)
+        private CloudRepo _data;
+        public StoreBL(CloudRepo p_data)
         {
             _data = p_data;
         }
@@ -22,7 +22,7 @@ namespace BusinessLogic
         }
         public void Update(Store p_store)
         {
-            _data.UpdateStore(p_store);
+            //_data.UpdateStore(p_store);
         }
     }
 }

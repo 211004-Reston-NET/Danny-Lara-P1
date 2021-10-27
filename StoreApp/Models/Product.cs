@@ -2,6 +2,8 @@ namespace Models
 {
     public class Product
     {
+        private int _id;
+        private int _storeID;
         private string _name;
         private double _price;
         private string _description;
@@ -15,6 +17,8 @@ namespace Models
                 throw new System.Exception("Cannot add a negative quantity!");
             _quantity = value;
         } }
+
+        public int Id { get => _id; set => _id = value; }
 
         public override string ToString()
         {

@@ -4,8 +4,14 @@ namespace Models
 {
     public class LineItems
     {
+        private int _orderNumber;
+        private int _productID;
         private Product _product;
         private int _quantity;
+        public LineItems()
+        {
+            
+        }
         public LineItems(Product p_product, int p_quantity)
         {
             _product = p_product;
@@ -14,5 +20,7 @@ namespace Models
 
         public Product Product { get => _product; set => _product = value; }
         public int Quantity { get => _quantity; set => _quantity = value; }
+        public int OrderNumber { get => _orderNumber; set => _orderNumber = value; }
+        public int ProductID { get => _productID; set => _productID = value; }
     }
 }
