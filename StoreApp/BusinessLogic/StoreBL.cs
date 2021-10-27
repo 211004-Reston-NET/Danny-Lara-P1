@@ -22,7 +22,7 @@ namespace BusinessLogic
         }
         public void Update(Store p_store)
         {
-            //_data.UpdateStore(p_store);
+            _data.UpdateStore(p_store);
         }
     }
 }
