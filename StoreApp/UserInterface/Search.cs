@@ -18,6 +18,36 @@ namespace UserInterface
             string i = Console.ReadLine();
             switch (i)
             {
+                case "5":
+                    Console.WriteLine("Enter customer ID:");
+                    try
+                    {
+                        int custId = Int32.Parse(Console.ReadLine());
+                        foreach (Customer c in _customerList)
+                        {
+                            if(custId == c.CustID)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Customer Found!");
+                                Console.WriteLine(c);
+                                Console.WriteLine("Press Enter to continue...");
+                                Console.ReadLine();
+                                return MenuType.MainMenu;
+                            }
+                            Console.WriteLine("Customer not found!\nPress Enter to search again...");
+                            Console.ReadLine();
+                            return MenuType.Search;
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        Console.WriteLine("Invalid input!\nPress Enter to try again...");
+                        Console.ReadLine();
+                        return MenuType.Search;
+                    }
+                    Console.WriteLine("Unknown error!\nPress Enter to try again...");
+                    Console.ReadLine();
+                    return MenuType.Search;
                 case "4":
                     Console.WriteLine("Enter customer name:");
                     string name = Console.ReadLine();
@@ -94,6 +124,8 @@ namespace UserInterface
                     Console.Clear();
                     return MenuType.MainMenu;
                 default:
+                    Console.WriteLine("Unknown error!\nPress Enter to try again...");
+                    Console.ReadLine();
                     return MenuType.Search;
             }
         }
@@ -103,6 +135,7 @@ namespace UserInterface
             Console.Clear();
             Console.WriteLine("Searching for a customer...");
             Console.WriteLine("How would you like to search?");
+            Console.WriteLine("[5] - Customer ID");
             Console.WriteLine("[4] - Name");
             Console.WriteLine("[3] - Address");
             Console.WriteLine("[2] - Phone Number");
