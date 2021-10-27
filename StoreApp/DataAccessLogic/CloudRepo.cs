@@ -7,7 +7,7 @@ namespace DataAccessLogic
 {
     public class CloudRepo //: IRepository
     {
-        private Entity.DataContext _context;
+        private static Entity.DataContext _context;
         public CloudRepo(Entity.DataContext p_context)
         {
             _context = p_context;
@@ -28,21 +28,20 @@ namespace DataAccessLogic
         }
         public List<Model.Store> GetAllStores()
         {
-            List<Model.Order> allOrders = _context.Orders.Select(o => 
-                new Model.Order()
-                {
-                }
-            ).ToList();
             return _context.Stores.Select(s =>
                 new Model.Store()
                 {
                     Name = s.StoreName,
                     Address = s.StoreAddress,
                     StoreID = s.StoreId,
-                    //Products = 
-                    //Orders =
+                    Products = new CloudRepo(_context).GetProductsByStoreId(s.StoreId),
+                    Orders = (List<Model.Order>)(from o in _context.Orders where o.StoreId == s.StoreId select o)
                 }
             ).ToList();
+        }
+        public void UpdateStore(Model.Store p_store)
+        {
+            
         }
 
         //Customer Methods
@@ -59,9 +58,47 @@ namespace DataAccessLogic
             _context.SaveChanges();
             return p_cust;
         }
+        public Model.Customer GetCustomerByCustId(int p_custID)
+        {
+            Entity.Customer cust = _context.Customers.Find(p_custID);
+            return new Model.Customer(){
+                CustID = cust.CustId,
+                Name = cust.CustName,
+                Address = cust.CustAddress,
+                Email = cust.CustEmail,
+                PhoneNumber = cust.CustPhoneNumber,
+                Orders = GetOrdersByCustId(cust.CustId)
+            };
+        }
         public List<Model.Customer> GetAllCustomers()
         {
-            return null;
+            var result = (from cust in _context.Customers select cust);
+            List<Model.Customer> customers = new List<Model.Customer>();
+            foreach (var c in result)
+            {
+                customers.Add(new Model.Customer(){
+                    CustID = c.CustId,
+                    Name = c.CustName,
+                    Address = c.CustAddress,
+                    Email = c.CustEmail,
+                    PhoneNumber = c.CustPhoneNumber,
+                    //Orders = GetOrdersByCustId(c.CustId)
+                });
+            }
+            return customers;
+            /*return _context.Customers.Select(c =>
+                new Model.Customer(){
+                    CustID = c.CustId,
+                    Name = c.CustName,
+                    Address = c.CustAddress,
+                    Email = c.CustEmail,
+                    PhoneNumber = c.CustPhoneNumber,
+                    Orders = GetOrdersByCustId(c.CustId)
+                }).ToList();*/
+        }
+        public void UpdateCustomer(int p_custId)
+        {
+
         }
 
         //Order Methods
@@ -69,45 +106,60 @@ namespace DataAccessLogic
         {
             return p_order;
         }
-        public List<Model.Order> GetOrders()
+        public List<Model.Order> GetOrdersByStoreId(int p_storeId)
         {
-            return _context.Orders.Select(o =>
-                new Model.Order()
-                {
-                    OrderNumber = o.OrderNumber,
-                    CustID = (int)o.CustId,
-                    StoreID = (int)o.StoreId,
-                    //Store = (Model.Store)o.Store,
-                    //Customer = o.Cust,
-                    //Items = 
-                    TotalPrice = (double)o.OrderTotalPrice
-                }
-            ).ToList();
+
+            return null;
+        }
+        public List<Model.Order> GetOrdersByCustId(int p_custId)
+        {
+            return _context.Orders.Where(o => o.CustId == p_custId)
+                    .Select(o => new Model.Order(){
+                        OrderNumber = o.OrderNumber,
+                        CustID = o.CustId,
+                        StoreID = o.StoreId
+                    }).ToList();
+        }
+
+        //Product Methods
+        public List<Model.Product> GetProductsByStoreId(int p_storeId)
+        {
+            return _context.Products.Where(p => p.StoreId == p_storeId).Select(p => 
+                new Model.Product(){
+                    Id = p.ProductId,
+                    StoreID = p.StoreId,
+                    Name = p.ProductName,
+                    Price = (double)p.ProductPrice,
+                    Description = p.ProductDescription,
+                    Quantity = p.ProductQuantity
+                }).ToList();
+        }
+        public static Model.Product GetProductByProductId(int p_id)
+        {
+            Entity.Product prodToFind = _context.Products.Find(p_id);
+            return new Model.Product(){
+                Id = prodToFind.ProductId,
+                StoreID = prodToFind.StoreId,
+                Name = prodToFind.ProductName,
+                Price = (double)prodToFind.ProductPrice,
+                Description = prodToFind.ProductDescription,
+                Quantity = prodToFind.ProductQuantity
+            };
         }
 
         //LineItem Methods
-        public List<Model.LineItems> GetLineItems()
+        public List<Model.LineItems> GetLineItemsByOrderId(int p_orderId)
         {
-            return _context.LineItems.Select(l =>
-                new Model.LineItems()
-                {
-                    //insert mapping here
-                }
+            return _context.LineItems.Where(l => l.OrderNumber == p_orderId)
+                .Select(l =>
+                    new Model.LineItems()
+                    {
+                        OrderNumber = l.OrderNumber,
+                        ProductID = l.ProductId,
+                        Product = GetProductByProductId(l.ProductId),
+                        Quantity = l.LineItemQuantity
+                    }
             ).ToList();
         }
-        /*public object Add(object p_newObject)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public List<object> GetAll()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool Update(List<object> p_newList)
-        {
-            throw new System.NotImplementedException();
-        }*/
     }
 }

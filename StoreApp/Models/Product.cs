@@ -19,6 +19,7 @@ namespace Models
         } }
 
         public int Id { get => _id; set => _id = value; }
+        public int StoreID { get => _storeID; set => _storeID = value; }
 
         public override string ToString()
         {

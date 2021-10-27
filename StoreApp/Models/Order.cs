@@ -7,7 +7,6 @@ namespace Models
         private int _orderNumber;
         private int _custID;
         private int _storeID;
-        private Customer _customer;
         private List<LineItems> _items;
         private Store _store;
         private double _totalPrice;
@@ -35,7 +34,6 @@ namespace Models
         public int OrderNumber { get => _orderNumber; set => _orderNumber = value; }
         public int CustID { get => _custID; set => _custID = value; }
         public int StoreID { get => _storeID; set => _storeID = value; }
-        public Customer Customer { get => _customer; set => _customer = value; }
 
         public void UpdatePrice()
         {
