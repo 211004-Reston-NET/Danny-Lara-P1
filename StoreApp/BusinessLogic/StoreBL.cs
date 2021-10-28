@@ -13,7 +13,13 @@ namespace BusinessLogic
         }
         public List<Store> GetAll()
         {
-            return _data.GetAllStores();
+            List<Store> stores = _data.GetAllStores();
+            foreach (Store s in stores)
+            {
+                s.Products = _data.GetProductsByStoreId(s.StoreID);
+                s.Orders = _data.GetOrdersByStoreId(s.StoreID);
+            }
+            return stores;
         }
         public void Update(Store p_store)
         {

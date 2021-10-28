@@ -14,7 +14,20 @@ namespace BusinessLogic
 
         public List<Customer> GetAll()
         {
-            return _data.GetAllCustomers();
+            List<Customer> customers = _data.GetAllCustomers();
+            foreach (Customer c in customers)
+            {
+                c.Orders = _data.GetOrdersByCustId(c.CustID);
+                foreach (Order o in c.Orders)
+                {
+                    o.Items = _data.GetLineItemsByOrderNum(o.OrderNumber);
+                    foreach (LineItems item in o.Items)
+                    {
+                        item.Product = _data.GetProductByProductId(item.ProductID);
+                    }
+                }
+            }
+            return customers;
         }
         public Customer Add(Customer p_cust)
         {
@@ -23,24 +36,5 @@ namespace BusinessLogic
             _data.AddCustomer(p_cust);
             return p_cust;
         }
-        /*
-        public List<object> GetAll()
-        {
-            return _data.GetAll();
-        }
-
-        public object Add(object o)
-        {
-            Customer c = (Customer)o;
-            if(c.Name == null || c.Address == null || c.Email == null || c.PhoneNumber == null)
-                throw new System.Exception("All customer info must be != null");
-            _data.Add(o);
-            return o;
-        }
-
-        public void Update(object o)
-        {
-            throw new System.NotImplementedException();
-        }*/
     }
 }
