@@ -33,6 +33,12 @@ namespace UserInterface
                         Console.WriteLine($"Orders for {store.Name}:");
                         foreach (Order o in orders)
                         {
+                            List<LineItems> l = _storeBL.GetOrderProducts(o.OrderNumber);
+                            foreach (LineItems item in l)
+                            {
+                                item.Product = _storeBL.GetProduct(item.ProductID);
+                            }
+                            o.Items = l;
                             Console.WriteLine("=========================");
                             Console.WriteLine(o);
                             Console.WriteLine("=========================");
@@ -60,6 +66,12 @@ namespace UserInterface
                         List<Order> orders = _storeBL.GetOrdersByStoreID(storeID);
                         foreach (Order o in orders)
                         {
+                            List<LineItems> l = _storeBL.GetOrderProducts(o.OrderNumber);
+                            foreach (LineItems item in l)
+                            {
+                                item.Product = _storeBL.GetProduct(item.ProductID);
+                            }
+                            o.Items = l;
                             Console.WriteLine("=========================");
                             Console.WriteLine(o);
                             Console.WriteLine("=========================");
@@ -82,6 +94,12 @@ namespace UserInterface
                             Console.WriteLine($"Orders for {cust.Name}:");
                             foreach (Order o in orders)
                             {
+                                List<LineItems> l = _storeBL.GetOrderProducts(o.OrderNumber);
+                                foreach (LineItems item in l)
+                                {
+                                    item.Product = _storeBL.GetProduct(item.ProductID);
+                                }
+                                o.Items = l;
                                 Console.WriteLine("=========================");
                                 Console.WriteLine(o);
                                 Console.WriteLine("=========================");
