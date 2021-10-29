@@ -40,7 +40,7 @@ namespace BusinessLogic
                 foreach (LineItems item in o.Items)
                 {
                     _data.UpdateLineItem(item);
-                    _data.UpdateProduct(item.Product, -(item.Quantity));
+                    _data.UpdateProduct(item.Product, -item.Quantity);
                 }
             }
             _data.UpdateStore(p_store);
@@ -48,6 +48,14 @@ namespace BusinessLogic
         public List<Product> GetStoreProducts(int p_storeId)
         {
             return _data.GetProductsByStoreId(p_storeId);
+        }
+        public List<LineItems> GetOrderProducts(int orderNumber)
+        {
+            return _data.GetLineItemsByOrderNum(orderNumber);
+        }
+        public Product GetProduct(int p_id)
+        {
+            return _data.GetProductByProductId(p_id);
         }
         public int AddOrder(Order p_order)
         {
