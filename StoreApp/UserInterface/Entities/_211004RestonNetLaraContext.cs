@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace DataAccessLogic.Entities
+namespace UserInterface.Entities
 {
-    public partial class DataContext : DbContext
+    public partial class _211004RestonNetLaraContext : DbContext
     {
-        public DataContext()
+        public _211004RestonNetLaraContext()
         {
         }
 
-        public DataContext(DbContextOptions<DataContext> options)
+        public _211004RestonNetLaraContext(DbContextOptions<_211004RestonNetLaraContext> options)
             : base(options)
         {
         }
