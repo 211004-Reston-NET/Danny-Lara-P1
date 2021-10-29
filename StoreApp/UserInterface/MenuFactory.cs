@@ -27,7 +27,7 @@ namespace UserInterface
                 case MenuType.Inventory:
                     return new Inventory(new StoreBL(new CloudRepo(new DataContext(options))));
                 case MenuType.OrderHistory:
-                    return new OrderHistory();
+                    return new OrderHistory(new StoreBL(new CloudRepo(new DataContext(options))), new CustomerBL(new CloudRepo(new DataContext(options))));
                 case MenuType.PlaceOrder:
                     return new PlaceOrder(new StoreBL(new CloudRepo(new DataContext(options))));
                 case MenuType.Replenish:
