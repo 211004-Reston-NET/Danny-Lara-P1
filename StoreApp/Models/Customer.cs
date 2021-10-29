@@ -17,10 +17,10 @@ namespace Models
 
         public Customer()
         {
-            _name = "";
-            _address = "";
-            _email = "";
-            _phoneNumber = "";
+            _name = null;
+            _address = null;
+            _email = null;
+            _phoneNumber = null;
             _orders = new List<Order>();
         }
         
