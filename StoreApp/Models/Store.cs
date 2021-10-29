@@ -25,7 +25,7 @@ namespace Models
 
         public override string ToString()
         {
-            string output = $"Store name: {Name}\nAddress: {Address}\nItems: ";
+            string output = $"Store name: {Name} ID: {_storeID}\nAddress: {Address}\nItems: ";
             foreach (Product item in Products)
             {
                 output += item.Name;
