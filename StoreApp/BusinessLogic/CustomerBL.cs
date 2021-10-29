@@ -36,5 +36,9 @@ namespace BusinessLogic
             _data.AddCustomer(p_cust);
             return p_cust;
         }
+        public List<Order> GetOrdersByCustId(int p_custId)
+        {
+            return _data.GetOrdersByCustId(p_custId);
+        }
     }
 }
