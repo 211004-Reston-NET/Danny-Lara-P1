@@ -9,10 +9,15 @@ namespace UserInterface
     {
         private StoreBL _storeBL;
         private List<Store> _stores;
+        private int _custId;
         public PlaceOrder(StoreBL p_storeBL)
         {
             _storeBL = p_storeBL;
             _stores = _storeBL.GetAll();
+            for (int i = 0; i < _stores.Count; i++)
+            {
+                _stores[i].StoreID = i+1;
+            }
         }
         public MenuType Choice()
         {
@@ -23,7 +28,7 @@ namespace UserInterface
             switch (input)
             {
                 case "4":
-                    page = new StoreOrderMenu(_storeBL, 0);
+                    page = new StoreOrderMenu(_storeBL, 0, _custId);
                     while (loop)
                     {
                         page.Menu();
@@ -34,7 +39,7 @@ namespace UserInterface
                     }
                     return m;
                 case "3":
-                    page = new StoreOrderMenu(_storeBL, 1);
+                    page = new StoreOrderMenu(_storeBL, 1, _custId);
                     while (loop)
                     {
                         page.Menu();
@@ -45,7 +50,7 @@ namespace UserInterface
                     }
                     return m;
                 case "2":
-                    page = new StoreOrderMenu(_storeBL, 2);
+                    page = new StoreOrderMenu(_storeBL, 2, _custId);
                     while (loop)
                     {
                         page.Menu();
@@ -56,7 +61,7 @@ namespace UserInterface
                     }
                     return m;
                 case "1":
-                    page = new StoreOrderMenu(_storeBL, 3);
+                    page = new StoreOrderMenu(_storeBL, 3, _custId);
                     while (loop)
                     {
                         page.Menu();
@@ -79,6 +84,28 @@ namespace UserInterface
 
         public void Menu()
         {
+            bool loop = true;
+            while (loop)
+            {
+                Console.Clear();
+                Console.WriteLine("Enter Customer ID:");
+                try
+                {
+                    _custId = Int32.Parse(Console.ReadLine());
+                }
+                catch (System.Exception)
+                {
+                    Console.WriteLine("Invaild input!\nPress Enter to try again...");
+                    Console.ReadLine();
+                }
+                if (_storeBL.CustExists(_custId))
+                    loop = false;
+                else
+                {
+                    Console.WriteLine("Customer not found!\nPress Enter to try again...");
+                    Console.ReadLine();
+                }
+            }
             Console.Clear();
             Console.WriteLine("Which store would you like to order from?");
             Console.WriteLine("[4] - Rose's Roses");
