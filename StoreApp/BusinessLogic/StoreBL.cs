@@ -21,6 +21,17 @@ namespace BusinessLogic
             }
             return stores;
         }
+        public Store GetStore(int p_storeId)
+        {
+            List<Store> stores = _data.GetAllStores();
+            Store result = new Store();
+            foreach (Store s in stores)
+            {
+                if (s.StoreID == p_storeId)
+                    result = s;
+            }
+            return result;
+        }
         public void Update(Store p_store)
         {
             foreach (Order o in p_store.Orders)
