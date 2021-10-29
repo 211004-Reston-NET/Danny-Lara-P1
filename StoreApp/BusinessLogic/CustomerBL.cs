@@ -29,6 +29,16 @@ namespace BusinessLogic
             }
             return customers;
         }
+        public Customer GetCustomer(int p_custId)
+        {
+            List<Customer> allCusts = _data.GetAllCustomers();
+            foreach (Customer c in allCusts)
+            {
+                if (c.CustID == p_custId)
+                    return c;
+            }
+            return null;
+        }
         public Customer Add(Customer p_cust)
         {
             if(p_cust.Name == null || p_cust.Address == null || p_cust.Email == null || p_cust.PhoneNumber == null)
