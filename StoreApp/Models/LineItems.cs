@@ -13,10 +13,11 @@ namespace Models
         {
             
         }
-        public LineItems(Product p_product, int p_quantity)
+        public LineItems(Product p_product, int p_productId, int p_quantity)
         {
             _product = p_product;
             _quantity = p_quantity;
+            _productID = p_productId;
         }
 
         public Product Product { get => _product; set => _product = value; }
