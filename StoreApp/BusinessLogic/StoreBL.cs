@@ -23,7 +23,37 @@ namespace BusinessLogic
         }
         public void Update(Store p_store)
         {
+            foreach (Order o in p_store.Orders)
+            {
+                _data.UpdateOrder(o);
+                foreach (LineItems item in o.Items)
+                {
+                    _data.UpdateLineItem(item);
+                    _data.UpdateProduct(item.Product, -(item.Quantity));
+                }
+            }
             _data.UpdateStore(p_store);
+        }
+        public int AddOrder(Order p_order)
+        {
+            int orderNumber = _data.AddOrder(p_order);
+            foreach (LineItems li in p_order.Items)
+            {
+                li.OrderNumber = orderNumber;
+                _data.AddLineItem(li);
+            }
+            return orderNumber;
+        }
+        public List<Order> GetOrdersByStoreID(int p_storeId)
+        {
+            return _data.GetOrdersByStoreId(p_storeId);
+        }
+        public bool CustExists(int p_custId)
+        {
+            if (_data.GetCustomerByCustId(p_custId) != null)
+                return true;
+            else
+                return false;
         }
     }
 }
