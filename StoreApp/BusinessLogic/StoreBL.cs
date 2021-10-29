@@ -45,6 +45,10 @@ namespace BusinessLogic
             }
             _data.UpdateStore(p_store);
         }
+        public List<Product> GetStoreProducts(int p_storeId)
+        {
+            return _data.GetProductsByStoreId(p_storeId);
+        }
         public int AddOrder(Order p_order)
         {
             int orderNumber = _data.AddOrder(p_order);
