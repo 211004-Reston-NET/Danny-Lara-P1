@@ -40,5 +40,12 @@ namespace BusinessLogic
         {
             return _data.GetOrdersByCustId(p_custId);
         }
+        public bool CustExists(int p_custId)
+        {
+            if (_data.GetCustomerByCustId(p_custId) != null)
+                return true;
+            else
+                return false;
+        }
     }
 }
