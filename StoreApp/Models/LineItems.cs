@@ -4,6 +4,7 @@ namespace Models
 {
     public class LineItems
     {
+        private int _lineItemId;
         private int _orderNumber;
         private int _productID;
         private Product _product;
@@ -22,5 +23,6 @@ namespace Models
         public int Quantity { get => _quantity; set => _quantity = value; }
         public int OrderNumber { get => _orderNumber; set => _orderNumber = value; }
         public int ProductID { get => _productID; set => _productID = value; }
+        public int LineItemId { get => _lineItemId; set => _lineItemId = value; }
     }
 }

@@ -30,7 +30,7 @@ namespace DataAccessLogic.Entities
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.HasKey(e => e.CustId)
-                    .HasName("PK__customer__A1B71F9059D12E89");
+                    .HasName("PK__customer__A1B71F90DD81F00C");
 
                 entity.ToTable("customer");
 
@@ -60,9 +60,9 @@ namespace DataAccessLogic.Entities
 
             modelBuilder.Entity<LineItem>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("lineItem");
+
+                entity.Property(e => e.LineItemId).HasColumnName("lineItem_id");
 
                 entity.Property(e => e.LineItemQuantity).HasColumnName("lineItem_quantity");
 
@@ -71,22 +71,22 @@ namespace DataAccessLogic.Entities
                 entity.Property(e => e.ProductId).HasColumnName("product_id");
 
                 entity.HasOne(d => d.OrderNumberNavigation)
-                    .WithMany()
+                    .WithMany(p => p.LineItems)
                     .HasForeignKey(d => d.OrderNumber)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__lineItem__order___40058253");
+                    .HasConstraintName("FK__lineItem__order___4E53A1AA");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany()
+                    .WithMany(p => p.LineItems)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__lineItem__produc__40F9A68C");
+                    .HasConstraintName("FK__lineItem__produc__4F47C5E3");
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.HasKey(e => e.OrderNumber)
-                    .HasName("PK__orders__730E34DE33F1E9DC");
+                    .HasName("PK__orders__730E34DE09B91646");
 
                 entity.ToTable("orders");
 
@@ -104,13 +104,13 @@ namespace DataAccessLogic.Entities
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__orders__cust_id__3D2915A8");
+                    .HasConstraintName("FK__orders__cust_id__4A8310C6");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.StoreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__orders__store_id__3E1D39E1");
+                    .HasConstraintName("FK__orders__store_id__4B7734FF");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -142,7 +142,7 @@ namespace DataAccessLogic.Entities
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.StoreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__product__store_i__3A4CA8FD");
+                    .HasConstraintName("FK__product__store_i__47A6A41B");
             });
 
             modelBuilder.Entity<Store>(entity =>

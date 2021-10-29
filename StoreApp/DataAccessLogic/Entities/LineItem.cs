@@ -7,6 +7,7 @@ namespace DataAccessLogic.Entities
 {
     public partial class LineItem
     {
+        public int LineItemId { get; set; }
         public int OrderNumber { get; set; }
         public int ProductId { get; set; }
         public int LineItemQuantity { get; set; }
