@@ -48,6 +48,7 @@ namespace Models
         public override string ToString()
         {
             string s = "Store: " + _store.Name;
+            s += "\nCust ID: " + CustID;
             s += "\nItems:\n";
             foreach (LineItems item in _items)
             {
