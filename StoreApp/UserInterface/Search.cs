@@ -30,9 +30,12 @@ namespace UserInterface
                                 Console.Clear();
                                 Console.WriteLine("Customer Found!");
                                 Console.WriteLine(c);
-                                Console.WriteLine("Press Enter to continue...");
-                                Console.ReadLine();
-                                return MenuType.MainMenu;
+                                Console.WriteLine("Place an order? Y/N");
+                                string response = Console.ReadLine();
+                                if(response.ToLower() == "y")
+                                    return MenuType.PlaceOrder;
+                                else
+                                    return MenuType.MainMenu;
                             }
                             Console.WriteLine("Customer not found!\nPress Enter to search again...");
                             Console.ReadLine();
@@ -53,14 +56,17 @@ namespace UserInterface
                     string name = Console.ReadLine();
                     foreach (Customer c in _customerList)
                     {
-                        if(name.Equals(c.Name))
+                        if(name.ToLower().Equals(c.Name.ToLower()))
                         {
                             Console.Clear();
                             Console.WriteLine("Customer Found!");
                             Console.WriteLine(c);
-                            Console.WriteLine("Press Enter to continue...");
-                            Console.ReadLine();
-                            return MenuType.MainMenu;
+                            Console.WriteLine("Place an order? Y/N");
+                                string response = Console.ReadLine();
+                                if(response.ToLower() == "y")
+                                    return MenuType.PlaceOrder;
+                                else
+                                    return MenuType.MainMenu;
                         }
                     }
                     Console.WriteLine("Customer not found!\nPress Enter to try again...");
@@ -76,9 +82,12 @@ namespace UserInterface
                             Console.Clear();
                             Console.WriteLine("Customer Found!");
                             Console.WriteLine(c);
-                            Console.WriteLine("Press Enter to continue...");
-                            Console.ReadLine();
-                            return MenuType.MainMenu;
+                            Console.WriteLine("Place an order? Y/N");
+                                string response = Console.ReadLine();
+                                if(response.ToLower() == "y")
+                                    return MenuType.PlaceOrder;
+                                else
+                                    return MenuType.MainMenu;
                         }
                     }
                     Console.WriteLine("Customer not found!\nPress Enter to try again...");
@@ -94,9 +103,12 @@ namespace UserInterface
                             Console.Clear();
                             Console.WriteLine("Customer Found!");
                             Console.WriteLine(c);
-                            Console.WriteLine("Press Enter to continue...");
-                            Console.ReadLine();
-                            return MenuType.MainMenu;
+                            Console.WriteLine("Place an order? Y/N");
+                            string response = Console.ReadLine();
+                            if(response.ToLower() == "y")
+                                return MenuType.PlaceOrder;
+                            else
+                                return MenuType.MainMenu;
                         }
                     }
                     Console.WriteLine("Customer not found!\nPress Enter to try again...");
@@ -112,9 +124,12 @@ namespace UserInterface
                             Console.Clear();
                             Console.WriteLine("Customer Found!");
                             Console.WriteLine(c);
-                            Console.WriteLine("Press Enter to continue...");
-                            Console.ReadLine();
-                            return MenuType.MainMenu;
+                            Console.WriteLine("Place an order? Y/N");
+                            string response = Console.ReadLine();
+                            if(response.ToLower() == "y")
+                                return MenuType.PlaceOrder;
+                            else
+                                return MenuType.MainMenu;;
                         }
                     }
                     Console.WriteLine("Customer not found!\nPress Enter to try again...");
