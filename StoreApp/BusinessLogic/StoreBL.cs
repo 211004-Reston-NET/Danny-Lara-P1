@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DataAccessLogic;
 using Models;
 
@@ -32,18 +33,25 @@ namespace BusinessLogic
             }
             return result;
         }
-        public void Update(Store p_store)
+        public void UpdateStore(Store p_store, int p_orderNum)
         {
             foreach (Order o in p_store.Orders)
             {
-                _data.UpdateOrder(o);
-                foreach (LineItems item in o.Items)
+                Console.WriteLine(o);
+                if (o.OrderNumber == p_orderNum)
                 {
-                    _data.UpdateLineItem(item);
-                    _data.UpdateProduct(item.Product, -item.Quantity);
+                    foreach (LineItems item in o.Items)
+                    {
+                        _data.UpdateLineItem(item);
+                        _data.UpdateProduct(item.Product, -item.Quantity);
+                    }
                 }
             }
-            _data.UpdateStore(p_store);
+        }
+        public bool UpdateProduct(Product p_product, int p_quantity)
+        {
+            _data.UpdateProduct(p_product, p_quantity);
+            return true;
         }
         public List<Product> GetStoreProducts(int p_storeId)
         {
