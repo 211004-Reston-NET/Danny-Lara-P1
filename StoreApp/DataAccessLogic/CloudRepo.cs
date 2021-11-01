@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Model = Models;
 using Entity = DataAccessLogic.Entities;
 using System.Linq;
+using System;
 
 namespace DataAccessLogic
 {
@@ -16,7 +17,7 @@ namespace DataAccessLogic
         }
 
         //Store Methods
-        public static Model.Store AddStore(Model.Store p_store)
+        private static Model.Store AddStore(Model.Store p_store)
         {
             _context.Stores.Add(
                 new Entity.Store()
@@ -33,17 +34,31 @@ namespace DataAccessLogic
             return _context.Stores.Select(s =>
                 new Model.Store()
                 {
+                    StoreID = s.StoreId,
                     Name = s.StoreName,
-                    Address = s.StoreAddress,
-                    StoreID = s.StoreId
+                    Address = s.StoreAddress
                 }
             ).ToList();
         }
-        public void UpdateStore(Model.Store p_store)
+        public bool UpdateStore(Model.Store p_store)
         {
-            
+            try
+            {
+                _context.Stores.Update(new Entity.Store(){
+                    StoreId = p_store.StoreID,
+                    StoreName = p_store.Name,
+                    StoreAddress = p_store.Address
+                });
+                _context.SaveChanges();
+                 return true;
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Update Store failed!");
+                return false;
+            }
         }
-        public static void StoreInit()
+        private static void StoreInit()
         {
             Model.Store s1 = new Model.Store()
             {
@@ -150,7 +165,7 @@ namespace DataAccessLogic
         }
 
         //Customer Methods
-        public Model.Customer AddCustomer(Model.Customer p_cust)
+        public int AddCustomer(Model.Customer p_cust)
         {
             _context.Customers.Add(
                 new Entity.Customer(){
@@ -161,7 +176,8 @@ namespace DataAccessLogic
                 }
             );
             _context.SaveChanges();
-            return p_cust;
+            List<Model.Customer> custs = GetAllCustomers();
+            return custs[custs.Count-1].CustID;
         }
         public Model.Customer GetCustomerByCustId(int p_custID)
         {
@@ -185,29 +201,53 @@ namespace DataAccessLogic
                     PhoneNumber = c.CustPhoneNumber
                 }).ToList();
         }
-        public void UpdateCustomer(int p_custId)
+        public bool UpdateCustomer(Model.Customer p_cust)
         {
-
+            try
+            {
+                _context.Customers.Update(new Entity.Customer(){
+                    CustId = p_cust.CustID,
+                    CustName = p_cust.Name,
+                    CustAddress = p_cust.Address,
+                    CustEmail = p_cust.Email,
+                    CustPhoneNumber = p_cust.PhoneNumber
+                });
+                 return true;
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Update Customer failed!");
+                return false;
+            }
         }
 
         //Order Methods
-        public Model.Order AddOrder(Model.Order p_order)
+        public int AddOrder(Model.Order p_order)
         {
             _context.Orders.Add(
                 new Entity.Order(){
-                    OrderNumber = p_order.OrderNumber,
                     CustId = p_order.CustID,
                     StoreId = p_order.StoreID,
                     OrderTotalPrice = (decimal)p_order.TotalPrice
                 }
             );
             _context.SaveChanges();
-            return p_order;
+            List<Model.Order> orders = GetAllOrders();
+            return orders[orders.Count-1].OrderNumber;
         }
         public List<Model.Order> GetOrdersByStoreId(int p_storeId)
         {
             return _context.Orders.Where(o => o.StoreId == p_storeId)
                     .Select(o => new Model.Order(){
+                        OrderNumber = o.OrderNumber,
+                        CustID = o.CustId,
+                        StoreID = o.StoreId,
+                        TotalPrice = (double)o.OrderTotalPrice
+                    }).ToList();
+        }
+        private static List<Model.Order> GetAllOrders()
+        {
+            return _context.Orders.Select(o => new Model.Order(){
                         OrderNumber = o.OrderNumber,
                         CustID = o.CustId,
                         StoreID = o.StoreId,
@@ -224,6 +264,25 @@ namespace DataAccessLogic
                         TotalPrice = (double)o.OrderTotalPrice
                     }).ToList();
         }
+        public bool UpdateOrder(Model.Order p_order)
+        {
+            try
+            {
+                _context.Orders.Update(new Entity.Order(){
+                    OrderNumber = p_order.OrderNumber,
+                    CustId = p_order.CustID,
+                    StoreId = p_order.StoreID,
+                    OrderTotalPrice = (decimal)p_order.TotalPrice
+                });
+                _context.SaveChanges();
+                 return true;
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Update Order failed!");
+                return false;
+            }
+        }
 
         //Product Methods
         public List<Model.Product> GetProductsByStoreId(int p_storeId)
@@ -231,7 +290,7 @@ namespace DataAccessLogic
             return _context.Products.Where(p => p.StoreId == p_storeId).Select(p => 
                 new Model.Product(){
                     Id = p.ProductId,
-                    StoreID = (int)p.StoreId,
+                    StoreID = p.StoreId,
                     Name = p.ProductName,
                     Price = (double)p.ProductPrice,
                     Description = p.ProductDescription,
@@ -262,6 +321,29 @@ namespace DataAccessLogic
             _context.SaveChanges();
             return p_product;
         }
+        public bool UpdateProduct(Model.Product p_product, int p_quantity)
+        {
+            try
+            {
+                int newQuantity = p_quantity+p_product.Quantity;
+                _context.Products.Update(new Entity.Product(){
+                    ProductId = p_product.Id,
+                    StoreId = p_product.StoreID,
+                    ProductName = p_product.Name,
+                    ProductPrice = (decimal)p_product.Price,
+                    ProductDescription = p_product.Description,
+                    ProductQuantity = newQuantity
+                });
+                _context.SaveChanges();
+                Console.WriteLine($"Product #:{p_product.Id} Updated!");
+                return true;
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Update Product Failed!");
+                return false;
+            }
+        }
 
         //LineItem Methods
         public List<Model.LineItems> GetLineItemsByOrderNum(int p_orderNum)
@@ -270,11 +352,43 @@ namespace DataAccessLogic
                 .Select(l =>
                     new Model.LineItems()
                     {
+                        LineItemId = l.LineItemId,
                         OrderNumber = l.OrderNumber,
                         ProductID = l.ProductId,
                         Quantity = l.LineItemQuantity
                     }
             ).ToList();
+        }
+        public Model.LineItems AddLineItem(Model.LineItems p_lineItem)
+        {
+            _context.LineItems.Add(new Entity.LineItem(){
+                LineItemId = p_lineItem.LineItemId,
+                OrderNumber = p_lineItem.OrderNumber,
+                ProductId = p_lineItem.ProductID,
+                LineItemQuantity = p_lineItem.Quantity
+            });
+            _context.SaveChanges();
+            return p_lineItem;
+        }
+        public bool UpdateLineItem(Model.LineItems p_lineItem)
+        {
+            try
+            {
+                 _context.LineItems.Update(new Entity.LineItem(){
+                     LineItemId = p_lineItem.LineItemId,
+                     OrderNumber = p_lineItem.OrderNumber,
+                     ProductId = p_lineItem.ProductID,
+                     LineItemQuantity = p_lineItem.Quantity
+                 });
+                 _context.SaveChanges();
+                 return true;
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Update LineItem failed!");
+                return false;
+            }
+            
         }
     }
 }

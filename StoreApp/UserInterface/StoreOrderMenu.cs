@@ -13,14 +13,17 @@ namespace UserInterface
         private List<LineItems> _orderProducts;
         private Order _order;
         
-        public StoreOrderMenu(StoreBL p_storeBL, int p_storeIndex)
+        public StoreOrderMenu(StoreBL p_storeBL, int p_storeIndex, int p_custId)
         {
             _storeBL = p_storeBL;
             _orderProducts = new List<LineItems>();
             _order = new Order();
             _allStores = _storeBL.GetAll();
             _store = _allStores[p_storeIndex];
+            _store.Products = _storeBL.GetStoreProducts(_store.StoreID);
             _order.Store = _store;
+            _order.StoreID = _store.StoreID;
+            _order.CustID = p_custId;
             if (_store.Orders == null)
                 _store.Orders = new List<Order>();
         }
@@ -31,8 +34,10 @@ namespace UserInterface
                 return MenuType.PlaceOrder;
             if(input == "1")
             {
+                int orderNumber = _storeBL.AddOrder(_order);
+                _order.OrderNumber = orderNumber;
                 _store.Orders.Add(_order);
-                _storeBL.Update(_store);
+                _storeBL.UpdateStore(_store, orderNumber);
                 Console.WriteLine("Order placed!\nPress Enter to return to the Main Menu...");
                 Console.ReadLine();
                 return MenuType.MainMenu;
@@ -48,7 +53,7 @@ namespace UserInterface
                     Console.WriteLine($"Please enter an amount of {_store.Products[j-2].Quantity} or less...");
                     quantity = Int32.Parse(Console.ReadLine());
                 }
-                _order.Items.Add(new LineItems(_store.Products[j-2], quantity));
+                _order.Items.Add(new LineItems(_store.Products[j-2], _store.Products[j-2].Id, quantity));
                 _store.Products[j-2].Quantity -= quantity;
                 _order.UpdatePrice();
                 return MenuType.StoreOrderMenu;
