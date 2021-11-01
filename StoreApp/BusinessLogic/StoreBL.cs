@@ -42,14 +42,14 @@ namespace BusinessLogic
                     foreach (LineItems item in o.Items)
                     {
                         _data.UpdateLineItem(item);
-                        _data.UpdateProduct(item.Product, -item.Quantity);
+                        _data.UpdateProduct(item.Product);
                     }
                 }
             }
         }
-        public bool UpdateProduct(Product p_product, int p_quantity)
+        public bool UpdateProduct(Product p_product)
         {
-            _data.UpdateProduct(p_product, p_quantity);
+            _data.UpdateProduct(p_product);
             return true;
         }
         public List<Product> GetStoreProducts(int p_storeId)

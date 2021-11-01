@@ -321,21 +321,19 @@ namespace DataAccessLogic
             _context.SaveChanges();
             return p_product;
         }
-        public bool UpdateProduct(Model.Product p_product, int p_quantity)
+        public bool UpdateProduct(Model.Product p_product)
         {
             try
             {
-                int newQuantity = p_quantity+p_product.Quantity;
                 _context.Products.Update(new Entity.Product(){
                     ProductId = p_product.Id,
                     StoreId = p_product.StoreID,
                     ProductName = p_product.Name,
                     ProductPrice = (decimal)p_product.Price,
                     ProductDescription = p_product.Description,
-                    ProductQuantity = newQuantity
+                    ProductQuantity = p_product.Quantity
                 });
                 _context.SaveChanges();
-                Console.WriteLine($"Product #:{p_product.Id} Updated!");
                 return true;
             }
             catch (System.Exception)
