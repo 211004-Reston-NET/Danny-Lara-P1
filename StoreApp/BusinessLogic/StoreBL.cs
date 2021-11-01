@@ -37,7 +37,6 @@ namespace BusinessLogic
         {
             foreach (Order o in p_store.Orders)
             {
-                Console.WriteLine(o);
                 if (o.OrderNumber == p_orderNum)
                 {
                     foreach (LineItems item in o.Items)
