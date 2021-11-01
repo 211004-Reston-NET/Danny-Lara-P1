@@ -37,7 +37,10 @@ namespace UserInterface
                 int orderNumber = _storeBL.AddOrder(_order);
                 _order.OrderNumber = orderNumber;
                 _store.Orders.Add(_order);
-                _storeBL.UpdateStore(_store, orderNumber);
+                foreach (LineItems item in _order.Items)
+                {
+                    _storeBL.UpdateProduct(item.Product);
+                }
                 Console.WriteLine("Order placed!\nPress Enter to return to the Main Menu...");
                 Console.ReadLine();
                 return MenuType.MainMenu;
