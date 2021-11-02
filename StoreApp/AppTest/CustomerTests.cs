@@ -71,5 +71,33 @@ namespace AppTest
 
             Assert.Throws<Exception>(() => cust.PhoneNumber = p_number);
         }
+
+        [Theory]
+        [InlineData("danny@email.com")]
+        [InlineData("steve@uk.co")]
+        [InlineData("dlara2021@somewhere.com")]
+        public void CustEmailVaid(string p_email)
+        {
+            Customer cust = new Customer();
+
+            cust.Email = p_email;
+
+            Assert.NotNull(cust.Email);
+            Assert.Equal(cust.Email, p_email);
+        }
+
+        /// <summary>
+        /// Testing for invaild email formats
+        /// </summary>
+        /// <param name="p_email">Invaild email addresses</param>
+        [Theory]
+        [InlineData("email.gmail")]
+        [InlineData("something.com")]
+        public void CustEmailInvaild(string p_email)
+        {
+            Customer cust = new Customer();
+
+            Assert.Throws<Exception>(() => cust.Email = p_email);
+        }
     }
 }
