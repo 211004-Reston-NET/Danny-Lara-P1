@@ -6,17 +6,25 @@ using System;
 
 namespace DataAccessLogic
 {
-    public class CloudRepo //: IRepository
+    /// <summary>
+    /// This class talks to the database and the business layer to process data for the user
+    /// </summary>
+    public class CloudRepo
     {
         private static Entity.DataContext _context;
         public CloudRepo(Entity.DataContext p_context)
         {
             _context = p_context;
-            if(_context.Stores.Count() == 0)
-                StoreInit();
+            if(_context.Stores.Count() == 0) //Checks to see if the stores table is empty
+                StoreInit(); //If it is empty then it will populate the store table
         }
 
         //Store Methods
+        /// <summary>
+        /// Adds a store to the database. Specifically the Store table
+        /// </summary>
+        /// <param name="p_store">The store object to be added</param>
+        /// <returns>Returns the store that was added</returns>
         private static Model.Store AddStore(Model.Store p_store)
         {
             _context.Stores.Add(
@@ -29,6 +37,10 @@ namespace DataAccessLogic
             _context.SaveChanges();
             return p_store;
         }
+        /// <summary>
+        /// Gets all the stores in the table
+        /// </summary>
+        /// <returns>A list of all the stores in the database</returns>
         public List<Model.Store> GetAllStores()
         {
             return _context.Stores.Select(s =>
@@ -40,25 +52,11 @@ namespace DataAccessLogic
                 }
             ).ToList();
         }
-        public bool UpdateStore(Model.Store p_store)
-        {
-            try
-            {
-                _context.Stores.Update(new Entity.Store(){
-                    StoreId = p_store.StoreID,
-                    StoreName = p_store.Name,
-                    StoreAddress = p_store.Address
-                });
-                _context.SaveChanges();
-                 return true;
-            }
-            catch (System.Exception)
-            {
-                Console.WriteLine("Update Store failed!");
-                return false;
-            }
-        }
-        private static void StoreInit()
+        /// <summary>
+        /// This method will be called if the store table in the database is empty and 
+        /// it will populate the store and product tables with store and product data
+        /// </summary>
+        private static void StoreInit() //Used to populate the database with the stores and their products
         {
             Model.Store s1 = new Model.Store()
             {
@@ -165,6 +163,11 @@ namespace DataAccessLogic
         }
 
         //Customer Methods
+        /// <summary>
+        /// Adds a customer to the customer table
+        /// </summary>
+        /// <param name="p_cust">The customer that is being added</param>
+        /// <returns>The customer that was added</returns>
         public int AddCustomer(Model.Customer p_cust)
         {
             _context.Customers.Add(
@@ -179,6 +182,11 @@ namespace DataAccessLogic
             List<Model.Customer> custs = GetAllCustomers();
             return custs[custs.Count-1].CustID;
         }
+        /// <summary>
+        /// Gets a customer from the customer table using the primary key (Customer_ID)
+        /// </summary>
+        /// <param name="p_custID">The ID of the customer to find</param>
+        /// <returns>The customer being requested</returns>
         public Model.Customer GetCustomerByCustId(int p_custID)
         {
             Entity.Customer cust = _context.Customers.Find(p_custID);
@@ -190,6 +198,10 @@ namespace DataAccessLogic
                 PhoneNumber = cust.CustPhoneNumber
             };
         }
+        /// <summary>
+        /// Gets all the customers in the customer table
+        /// </summary>
+        /// <returns>A list of all the customers in the database</returns>
         public List<Model.Customer> GetAllCustomers()
         {
             return _context.Customers.Select(c =>
@@ -201,6 +213,11 @@ namespace DataAccessLogic
                     PhoneNumber = c.CustPhoneNumber
                 }).ToList();
         }
+        /// <summary>
+        /// Although not implemented, will be able to change/update a customer's info.
+        /// </summary>
+        /// <param name="p_cust">The customer that will be updated</param>
+        /// <returns>True if the update was successful or false if it failed</returns>
         public bool UpdateCustomer(Model.Customer p_cust)
         {
             try
@@ -222,6 +239,11 @@ namespace DataAccessLogic
         }
 
         //Order Methods
+        /// <summary>
+        /// Adds an order to the order table in the database
+        /// </summary>
+        /// <param name="p_order">The order being added to the database</param>
+        /// <returns>The order number of the order being added (The primary key)</returns>
         public int AddOrder(Model.Order p_order)
         {
             _context.Orders.Add(
@@ -235,6 +257,12 @@ namespace DataAccessLogic
             List<Model.Order> orders = GetAllOrders();
             return orders[orders.Count-1].OrderNumber;
         }
+        /// <summary>
+        /// Gets all the orders from a specific store using 
+        /// the store ID (primary key)
+        /// </summary>
+        /// <param name="p_storeId">The store ID</param>
+        /// <returns>A list of all the orders at the specified store</returns>
         public List<Model.Order> GetOrdersByStoreId(int p_storeId)
         {
             return _context.Orders.Where(o => o.StoreId == p_storeId)
@@ -245,6 +273,10 @@ namespace DataAccessLogic
                         TotalPrice = (double)o.OrderTotalPrice
                     }).ToList();
         }
+        /// <summary>
+        /// Gets all the orders currently in the database
+        /// </summary>
+        /// <returns>A list of all the orders in the database</returns>
         private static List<Model.Order> GetAllOrders()
         {
             return _context.Orders.Select(o => new Model.Order(){
@@ -254,6 +286,12 @@ namespace DataAccessLogic
                         TotalPrice = (double)o.OrderTotalPrice
                     }).ToList();
         }
+        /// <summary>
+        /// Gets all the orders from the order table made by the 
+        /// specified customer using the customer's ID
+        /// </summary>
+        /// <param name="p_custId">The customer's ID</param>
+        /// <returns>A list of all the orders made by the customer</returns>
         public List<Model.Order> GetOrdersByCustId(int p_custId)
         {
             return _context.Orders.Where(o => o.CustId == p_custId)
@@ -264,27 +302,14 @@ namespace DataAccessLogic
                         TotalPrice = (double)o.OrderTotalPrice
                     }).ToList();
         }
-        public bool UpdateOrder(Model.Order p_order)
-        {
-            try
-            {
-                _context.Orders.Update(new Entity.Order(){
-                    OrderNumber = p_order.OrderNumber,
-                    CustId = p_order.CustID,
-                    StoreId = p_order.StoreID,
-                    OrderTotalPrice = (decimal)p_order.TotalPrice
-                });
-                _context.SaveChanges();
-                 return true;
-            }
-            catch (System.Exception)
-            {
-                Console.WriteLine("Update Order failed!");
-                return false;
-            }
-        }
 
         //Product Methods
+        /// <summary>
+        /// Gets all the products from a specified store 
+        /// using the store's ID
+        /// </summary>
+        /// <param name="p_storeId">The ID of the store</param>
+        /// <returns>A list of all the products the store has</returns>
         public List<Model.Product> GetProductsByStoreId(int p_storeId)
         {
             return _context.Products.Where(p => p.StoreId == p_storeId).Select(p => 
@@ -297,6 +322,11 @@ namespace DataAccessLogic
                     Quantity = p.ProductQuantity
                 }).ToList();
         }
+        /// <summary>
+        /// Gets a specific product using the product's ID
+        /// </summary>
+        /// <param name="p_id">The ID of the product</param>
+        /// <returns>The product from the product table in the database</returns>
         public Model.Product GetProductByProductId(int p_id)
         {
             Entity.Product prodToFind = _context.Products.Find(p_id);
@@ -309,6 +339,11 @@ namespace DataAccessLogic
                 Quantity = prodToFind.ProductQuantity
             };
         }
+        /// <summary>
+        /// Adds a product to the database in the product table
+        /// </summary>
+        /// <param name="p_product">The product to be added</param>
+        /// <returns>The product that was added</returns>
         public static Model.Product AddProduct(Model.Product p_product)
         {
             _context.Products.Add(new Entity.Product(){
@@ -321,6 +356,12 @@ namespace DataAccessLogic
             _context.SaveChanges();
             return p_product;
         }
+        /// <summary>
+        /// Updates the specified product in the product table 
+        /// in the database
+        /// </summary>
+        /// <param name="p_product">The product to update</param>
+        /// <returns>True if the update was successful or false otherwise</returns>
         public bool UpdateProduct(Model.Product p_product)
         {
             try
@@ -344,6 +385,12 @@ namespace DataAccessLogic
         }
 
         //LineItem Methods
+        /// <summary>
+        /// Gets all the line items associated with the 
+        /// specified order number
+        /// </summary>
+        /// <param name="p_orderNum">The order number</param>
+        /// <returns>A list of all the line items in the specified order</returns>
         public List<Model.LineItems> GetLineItemsByOrderNum(int p_orderNum)
         {
             return _context.LineItems.Where(l => l.OrderNumber == p_orderNum)
@@ -357,6 +404,11 @@ namespace DataAccessLogic
                     }
             ).ToList();
         }
+        /// <summary>
+        /// Adds a line item to the line item table in the database
+        /// </summary>
+        /// <param name="p_lineItem">The line item to be added</param>
+        /// <returns>The line item that was added</returns>
         public Model.LineItems AddLineItem(Model.LineItems p_lineItem)
         {
             _context.LineItems.Add(new Entity.LineItem(){
@@ -368,6 +420,11 @@ namespace DataAccessLogic
             _context.SaveChanges();
             return p_lineItem;
         }
+        /// <summary>
+        /// Updates the specified line item in the database
+        /// </summary>
+        /// <param name="p_lineItem">The line item to be updated</param>
+        /// <returns>True if the update was successful or false otherwise</returns>
         public bool UpdateLineItem(Model.LineItems p_lineItem)
         {
             try
