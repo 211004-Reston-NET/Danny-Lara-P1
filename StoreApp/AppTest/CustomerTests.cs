@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AppTest
 {
-    public class UnitTest1
+    public class CustomerTests
     {
         /// <summary>
         /// Testing for valid name formats
