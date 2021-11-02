@@ -73,6 +73,7 @@ namespace UserInterface
         public void Menu()
         {
             Console.Clear();
+            Console.WriteLine("--------Placing an Order--------");
             Console.WriteLine("Current order:");
             Console.WriteLine(_order);
             Console.WriteLine("[0] - Go Back");

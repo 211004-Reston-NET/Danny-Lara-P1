@@ -107,6 +107,7 @@ namespace UserInterface
                 }
             }
             Console.Clear();
+            Console.WriteLine("---------------Place Order---------------");
             Console.WriteLine("Which store would you like to order from?");
             Console.WriteLine("[4] - Rose's Roses");
             Console.WriteLine("[3] - David's Daffodils");

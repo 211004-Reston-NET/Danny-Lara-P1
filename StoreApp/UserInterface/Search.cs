@@ -148,7 +148,7 @@ namespace UserInterface
         public void Menu()
         {
             Console.Clear();
-            Console.WriteLine("Searching for a customer...");
+            Console.WriteLine("-----Searching for a customer-----");
             Console.WriteLine("How would you like to search?");
             Console.WriteLine("[5] - Customer ID");
             Console.WriteLine("[4] - Name");

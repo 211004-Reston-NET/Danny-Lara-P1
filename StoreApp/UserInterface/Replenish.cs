@@ -79,6 +79,7 @@ namespace UserInterface
                     _allProducts.Add(p);
                 }
             }
+            Console.WriteLine("-----------Inventory Replenish-----------");
             Console.WriteLine("Which item would you like to restock?");
             Console.WriteLine("[0] - Go back to Main Menu");
             for (int i = 0; i < _allProducts.Count; i++) //Displays all products

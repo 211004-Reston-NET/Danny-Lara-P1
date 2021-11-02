@@ -57,6 +57,7 @@ namespace UserInterface
         public void Menu()
         {
             Console.Clear();
+            Console.WriteLine("-------------Inventory-------------");
             Console.WriteLine("Which store would you like to see?");
             Console.WriteLine("[4] - Rose's Roses");
             Console.WriteLine("[3] - David's Daffodils");

@@ -39,9 +39,9 @@ namespace UserInterface
                                 item.Product = _storeBL.GetProduct(item.ProductID);
                             }
                             o.Items = l;
-                            Console.WriteLine("=========================");
+                            Console.WriteLine("=====================================");
                             Console.WriteLine(o);
-                            Console.WriteLine("=========================");
+                            Console.WriteLine("=====================================");
                         }
                         Console.WriteLine("Press Enter to continue...");
                         Console.ReadLine();
@@ -72,9 +72,9 @@ namespace UserInterface
                                 item.Product = _storeBL.GetProduct(item.ProductID);
                             }
                             o.Items = l;
-                            Console.WriteLine("=========================");
+                            Console.WriteLine("=====================================");
                             Console.WriteLine(o);
-                            Console.WriteLine("=========================");
+                            Console.WriteLine("=====================================");
                         }
                         Console.WriteLine("Press Enter to continue...");
                         Console.ReadLine();
@@ -100,9 +100,9 @@ namespace UserInterface
                                     item.Product = _storeBL.GetProduct(item.ProductID);
                                 }
                                 o.Items = l;
-                                Console.WriteLine("=========================");
+                                Console.WriteLine("=====================================");
                                 Console.WriteLine(o);
-                                Console.WriteLine("=========================");
+                                Console.WriteLine("=====================================");
                             }
                             Console.WriteLine("Press Enter to continue...");
                             Console.ReadLine();
