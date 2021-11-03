@@ -18,6 +18,17 @@ namespace UserInterface
             string i = Console.ReadLine();
             switch (i)
             {
+                case "6":
+                    Console.Clear();
+                    foreach (Customer c in _customerList)
+                    {
+                        Console.WriteLine("================================");
+                        Console.WriteLine(c);
+                        Console.WriteLine("================================");
+                    }
+                    Console.WriteLine("Press Enter to continue...");
+                    Console.ReadLine();
+                    return MenuType.MainMenu;
                 case "5":
                     Console.WriteLine("Enter customer ID:");
                     try
@@ -150,6 +161,7 @@ namespace UserInterface
             Console.Clear();
             Console.WriteLine("-----Searching for a customer-----");
             Console.WriteLine("How would you like to search?");
+            Console.WriteLine("[6] - View All Customers");
             Console.WriteLine("[5] - Customer ID");
             Console.WriteLine("[4] - Name");
             Console.WriteLine("[3] - Address");
