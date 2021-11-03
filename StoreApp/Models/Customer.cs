@@ -64,12 +64,7 @@ namespace Models
 
         public override string ToString()
         {
-            String s = $"ID:\t\t{CustID}\nName:\t\t{Name}\nAddresss:\t{Address}\nEmail:\t\t{Email}\nPhone#:\t\t{PhoneNumber}\nOrders:\t\t";
-            foreach (Order item in _orders)
-            {
-                s += item;
-                s += '\n';
-            }
+            String s = $"ID:\t\t{CustID}\nName:\t\t{Name}\nAddresss:\t{Address}\nEmail:\t\t{Email}\nPhone#:\t\t{PhoneNumber}";
             return s;
         }
     }
