@@ -22,9 +22,9 @@ namespace UserInterface
                     Console.Clear();
                     foreach (Customer c in _customerList)
                     {
-                        Console.WriteLine("================================");
+                        Console.WriteLine("======================================");
                         Console.WriteLine(c);
-                        Console.WriteLine("================================");
+                        Console.WriteLine("======================================");
                     }
                     Console.WriteLine("Press Enter to continue...");
                     Console.ReadLine();
