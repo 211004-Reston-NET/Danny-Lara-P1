@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
@@ -22,8 +24,11 @@ namespace Models
 
         public Product Product { get => _product; set => _product = value; }
         public int Quantity { get => _quantity; set => _quantity = value; }
+        [ForeignKey("OrderNumber")]
         public int OrderNumber { get => _orderNumber; set => _orderNumber = value; }
+        [ForeignKey("ProductID")]
         public int ProductID { get => _productID; set => _productID = value; }
+        [Key]
         public int LineItemId { get => _lineItemId; set => _lineItemId = value; }
     }
 }

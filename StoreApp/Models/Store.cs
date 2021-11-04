@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
@@ -21,6 +22,7 @@ namespace Models
         public string Address { get => _address; set => _address = value; }
         public List<Product> Products { get => _products; set => _products = value; }
         public List<Order> Orders { get => _orders; set => _orders = value; }
+        [Key]
         public int StoreID { get => _storeID; set => _storeID = value; }
 
         public override string ToString()

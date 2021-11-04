@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Models
 {
     public class Product
@@ -17,13 +20,14 @@ namespace Models
                 throw new System.Exception("Cannot add a negative quantity!");
             _quantity = value;
         } }
-
-        public int Id { get => _id; set => _id = value; }
+        [Key]    
+        public int ProductID { get => _id; set => _id = value; }
+        [ForeignKey("StoreID")]
         public int StoreID { get => _storeID; set => _storeID = value; }
 
         public override string ToString()
         {
-            return $"Product ID:\t{Id}\nProduct name:\t{Name}\nPrice:\t\t${Price}\nDescription:\t{Description}\nQuantity:\t{Quantity}";
+            return $"Product ID:\t{ProductID}\nProduct name:\t{Name}\nPrice:\t\t${Price}\nDescription:\t{Description}\nQuantity:\t{Quantity}";
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System;
 using System.Net.Mail;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
@@ -60,6 +61,7 @@ namespace Models
             _phoneNumber = value;
             } }
         public List<Order> Orders { get => _orders; set => _orders = value; }
+        [Key]
         public int CustID { get => _custID; set => _custID = value; }
 
         public override string ToString()

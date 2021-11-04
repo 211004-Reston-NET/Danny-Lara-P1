@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
@@ -31,8 +33,11 @@ namespace Models
         public List<LineItems> Items { get => _items; set => _items = value; }
         public Store Store { get => _store; set => _store = value; }
         public double TotalPrice { get => _totalPrice; set => _totalPrice = value; }
+        [Key]
         public int OrderNumber { get => _orderNumber; set => _orderNumber = value; }
+        [ForeignKey("CustID")]
         public int CustID { get => _custID; set => _custID = value; }
+        [ForeignKey("StoreID")]
         public int StoreID { get => _storeID; set => _storeID = value; }
 
         public void UpdatePrice()
