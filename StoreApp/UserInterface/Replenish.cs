@@ -13,7 +13,7 @@ namespace UserInterface
         {
             _storeBL = p_storeBL;
             _stores = _storeBL.GetAll();
-            List<Product> _allProducts = new List<Product>();
+            _allProducts = new List<Product>();
             foreach (Store s in _stores)
             {
                 foreach (Product p in s.Products)
@@ -24,14 +24,6 @@ namespace UserInterface
         }
         public MenuType Choice()
         {
-            List<Product> _allProducts = new List<Product>();
-            foreach (Store s in _stores)
-            {
-                foreach (Product p in s.Products)
-                {
-                    _allProducts.Add(p);
-                }
-            }
             string input = Console.ReadLine();
             if (input == "0")
                 return MenuType.MainMenu;
