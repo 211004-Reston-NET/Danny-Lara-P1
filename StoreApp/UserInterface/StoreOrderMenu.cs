@@ -56,7 +56,7 @@ namespace UserInterface
                     Console.WriteLine($"Please enter an amount of {_store.Products[j-2].Quantity} or less...");
                     quantity = Int32.Parse(Console.ReadLine());
                 }
-                _order.Items.Add(new LineItems(_store.Products[j-2], _store.Products[j-2].Id, quantity));
+                _order.Items.Add(new LineItems(_store.Products[j-2], _store.Products[j-2].ProductID, quantity));
                 _store.Products[j-2].Quantity -= quantity;
                 _order.UpdatePrice();
                 return MenuType.StoreOrderMenu;

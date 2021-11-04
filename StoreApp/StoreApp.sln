@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface", "UserInterface\UserInterface.csproj", "{C34681B8-C31B-408F-885B-9743B9D9E23F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserInterface", "UserInterface\UserInterface.csproj", "{C34681B8-C31B-408F-885B-9743B9D9E23F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{AEBCB81A-E215-4F1A-B4C9-E8F655EA3A86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{AEBCB81A-E215-4F1A-B4C9-E8F655EA3A86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{4D7073C0-827C-4826-A991-19D807FE5835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{4D7073C0-827C-4826-A991-19D807FE5835}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLogic", "DataAccessLogic\DataAccessLogic.csproj", "{84D5FD63-5D7C-43E1-AC29-9ECEEE40CD61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLogic", "DataAccessLogic\DataAccessLogic.csproj", "{84D5FD63-5D7C-43E1-AC29-9ECEEE40CD61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppTest", "AppTest\AppTest.csproj", "{5F4C644B-DF96-4185-86E7-CE8C3D06EB7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppTest", "AppTest\AppTest.csproj", "{5F4C644B-DF96-4185-86E7-CE8C3D06EB7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{83340E1C-8ED6-4182-A855-A63A361FE0E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C34681B8-C31B-408F-885B-9743B9D9E23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -86,5 +85,23 @@ Global
 		{5F4C644B-DF96-4185-86E7-CE8C3D06EB7C}.Release|x64.Build.0 = Release|Any CPU
 		{5F4C644B-DF96-4185-86E7-CE8C3D06EB7C}.Release|x86.ActiveCfg = Release|Any CPU
 		{5F4C644B-DF96-4185-86E7-CE8C3D06EB7C}.Release|x86.Build.0 = Release|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Debug|x64.Build.0 = Debug|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Debug|x86.Build.0 = Debug|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Release|x64.ActiveCfg = Release|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Release|x64.Build.0 = Release|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Release|x86.ActiveCfg = Release|Any CPU
+		{83340E1C-8ED6-4182-A855-A63A361FE0E1}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65EE621E-A834-4239-8D02-9160F2F29085}
 	EndGlobalSection
 EndGlobal
