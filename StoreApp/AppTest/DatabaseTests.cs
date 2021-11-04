@@ -4,9 +4,8 @@ using DataAccessLogic;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using DataAccessLogic.Entities;
 using System.Collections.Generic;
-using Model = Models;
+using Models;
 
 namespace AppTest
 {
@@ -24,7 +23,7 @@ namespace AppTest
                 .Build();
             DbContextOptions<DataContext> options = new DbContextOptionsBuilder<DataContext>().UseSqlServer(config.GetConnectionString("Reference2DB")).Options;
             StoreBL bl = new StoreBL(new CloudRepo(new DataContext(options)));
-            List<Model.Store> stores = bl.GetAll();
+            List<Store> stores = bl.GetAll();
 
             Assert.NotEmpty(stores);
             Assert.NotNull(stores);
@@ -42,7 +41,7 @@ namespace AppTest
                 .Build();
             DbContextOptions<DataContext> options = new DbContextOptionsBuilder<DataContext>().UseSqlServer(config.GetConnectionString("Reference2DB")).Options;
             StoreBL bl = new StoreBL(new CloudRepo(new DataContext(options)));
-            List<Model.Product> products = bl.GetStoreProducts(1);
+            List<Product> products = bl.GetStoreProducts(1);
 
             Assert.NotEmpty(products);
             Assert.NotNull(products);
@@ -60,7 +59,7 @@ namespace AppTest
                 .Build();
             DbContextOptions<DataContext> options = new DbContextOptionsBuilder<DataContext>().UseSqlServer(config.GetConnectionString("Reference2DB")).Options;
             CustomerBL bl = new CustomerBL(new CloudRepo(new DataContext(options)));
-            List<Model.Customer> customers = bl.GetAll();
+            List<Customer> customers = bl.GetAll();
 
             Assert.NotEmpty(customers);
             Assert.NotNull(customers);
