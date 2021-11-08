@@ -56,7 +56,7 @@ namespace DataAccessLogic.Migrations
                         principalColumn: "store_id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_orders_customer_CustomerCustID",
+                        name: "FK_orders_customer_customer_id",
                         column: x => x.customer_id,
                         principalTable: "customer",
                         principalColumn: "customer_id",
@@ -124,7 +124,7 @@ namespace DataAccessLogic.Migrations
                 column: "product_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_orders_CustomerCustID",
+                name: "IX_orders_customer_id",
                 table: "orders",
                 column: "customer_id");
 
