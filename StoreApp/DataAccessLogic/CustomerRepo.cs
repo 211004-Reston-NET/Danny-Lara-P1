@@ -5,7 +5,7 @@ using Models;
 
 namespace DataAccessLogic
 {
-    public class CustomerRepo : IRepository
+    public class CustomerRepo
     {
         private const string _customerFilepath = "./../DataAccessLogic/Database/CustomerData.json";
         private string _jsonString;

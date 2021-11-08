@@ -5,7 +5,7 @@ using Models;
 
 namespace DataAccessLogic
 {
-    public class StoreRepo : IRepository
+    public class StoreRepo
     {
         private const string _storeFilepath = "./../DataAccessLogic/Database/StoreData.json";
         private string _jsonString;
