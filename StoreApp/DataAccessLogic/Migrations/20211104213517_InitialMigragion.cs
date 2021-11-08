@@ -114,7 +114,7 @@ namespace DataAccessLogic.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_lineItem_OrderNumber1",
+                name: "IX_lineItem_OrderNumber",
                 table: "lineItem",
                 column: "order_number");
 

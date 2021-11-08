@@ -30,7 +30,7 @@ namespace WebUI
             services.AddScoped<StoreBL>();
             services.AddScoped<CustomerBL>();
             services.AddScoped<CloudRepo>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

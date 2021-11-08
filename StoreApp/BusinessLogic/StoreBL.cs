@@ -20,11 +20,11 @@ namespace BusinessLogic
         public List<Store> GetAll()
         {
             List<Store> stores = _data.GetAllStores();
-            foreach (Store s in stores)
+            /*foreach (Store s in stores)
             {
                 s.Products = _data.GetProductsByStoreId(s.StoreID);
                 s.Orders = _data.GetOrdersByStoreId(s.StoreID);
-            }
+            }*/
             return stores;
         }
         /// <summary>
