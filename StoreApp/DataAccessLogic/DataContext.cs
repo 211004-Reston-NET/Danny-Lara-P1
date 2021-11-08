@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Models;
 
 #nullable disable
@@ -33,7 +35,7 @@ namespace DataAccessLogic
 
                 entity.ToTable("customer");
 
-                entity.Property(e => e.CustID).HasColumnName("customer_id");
+                entity.Property(e => e.CustID).HasColumnName("cust_id");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(75)
@@ -59,8 +61,6 @@ namespace DataAccessLogic
 
             modelBuilder.Entity<LineItems>(entity =>
             {
-                entity.HasKey(e => e.LineItemId).HasName("lineItem_id");
-
                 entity.ToTable("lineItem");
 
                 entity.Property(e => e.LineItemId).HasColumnName("lineItem_id");
@@ -70,6 +70,18 @@ namespace DataAccessLogic
                 entity.Property(e => e.OrderNumber).HasColumnName("order_number");
 
                 entity.Property(e => e.ProductID).HasColumnName("product_id");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.Items)
+                    .HasForeignKey(d => d.OrderNumber)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__lineItem__order___4E53A1AA");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.LineItems)
+                    .HasForeignKey(d => d.ProductID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__lineItem__produc__4F47C5E3");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -81,13 +93,19 @@ namespace DataAccessLogic
 
                 entity.Property(e => e.OrderNumber).HasColumnName("order_number");
 
-                entity.Property(e => e.CustID).HasColumnName("customer_id");
+                entity.Property(e => e.CustID).HasColumnName("cust_id");
 
                 entity.Property(e => e.TotalPrice)
                     .HasColumnType("decimal(10, 2)")
                     .HasColumnName("order_total_price");
 
                 entity.Property(e => e.StoreID).HasColumnName("store_id");
+
+                entity.HasOne(d => d.Cust)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.CustID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__orders__cust_id__4A8310C6");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.Orders)
@@ -120,6 +138,12 @@ namespace DataAccessLogic
                 entity.Property(e => e.Quantity).HasColumnName("product_quantity");
 
                 entity.Property(e => e.StoreID).HasColumnName("store_id");
+
+                entity.HasOne(d => d.Store)
+                    .WithMany(p => p.Products)
+                    .HasForeignKey(d => d.StoreID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__product__store_i__47A6A41B");
             });
 
             modelBuilder.Entity<Store>(entity =>

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,6 +13,8 @@ namespace Models
         private string _description;
         private int _quantity;
 
+        public Store Store { get; set; }
+        public List<LineItems> LineItems { get; set; }
         public string Name { get => _name; set => _name = value; }
         public double Price { get => _price; set => _price = value; }
         public string Description { get => _description; set => _description = value; }

@@ -30,6 +30,7 @@ namespace Models
             }
             _totalPrice = total;
         }
+        public Customer Cust { get; set; }
         public List<LineItems> Items { get => _items; set => _items = value; }
         public Store Store { get => _store; set => _store = value; }
         public double TotalPrice { get => _totalPrice; set => _totalPrice = value; }

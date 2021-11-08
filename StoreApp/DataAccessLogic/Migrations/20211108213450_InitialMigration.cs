@@ -2,7 +2,7 @@
 
 namespace DataAccessLogic.Migrations
 {
-    public partial class InitialMigragion : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,7 +10,7 @@ namespace DataAccessLogic.Migrations
                 name: "customer",
                 columns: table => new
                 {
-                    customer_id = table.Column<int>(type: "int", nullable: false)
+                    cust_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     cust_name = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: false),
                     cust_address = table.Column<string>(type: "varchar(75)", unicode: false, maxLength: 75, nullable: true),
@@ -19,7 +19,7 @@ namespace DataAccessLogic.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__customer__A1B71F90DD81F00C", x => x.customer_id);
+                    table.PrimaryKey("PK__customer__A1B71F90DD81F00C", x => x.cust_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,23 +43,23 @@ namespace DataAccessLogic.Migrations
                     order_number = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     order_total_price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    customer_id = table.Column<int>(type: "int", nullable: false),
+                    cust_id = table.Column<int>(type: "int", nullable: false),
                     store_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__orders__730E34DE09B91646", x => x.order_number);
                     table.ForeignKey(
+                        name: "FK__orders__cust_id__4A8310C6",
+                        column: x => x.cust_id,
+                        principalTable: "customer",
+                        principalColumn: "cust_id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK__orders__store_id__4B7734FF",
                         column: x => x.store_id,
                         principalTable: "store",
                         principalColumn: "store_id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_orders_customer_customer_id",
-                        column: x => x.customer_id,
-                        principalTable: "customer",
-                        principalColumn: "customer_id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -79,11 +79,11 @@ namespace DataAccessLogic.Migrations
                 {
                     table.PrimaryKey("PK_product", x => x.product_id);
                     table.ForeignKey(
-                        name: "FK_product_store_store_id",
+                        name: "FK__product__store_i__47A6A41B",
                         column: x => x.store_id,
                         principalTable: "store",
                         principalColumn: "store_id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,23 +98,23 @@ namespace DataAccessLogic.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("lineItem_id", x => x.lineItem_id);
+                    table.PrimaryKey("PK_lineItem", x => x.lineItem_id);
                     table.ForeignKey(
-                        name: "FK_lineItem_orders_OrderNumber1",
+                        name: "FK__lineItem__order___4E53A1AA",
                         column: x => x.order_number,
                         principalTable: "orders",
                         principalColumn: "order_number",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_lineItem_product_product_id",
+                        name: "FK__lineItem__produc__4F47C5E3",
                         column: x => x.product_id,
                         principalTable: "product",
                         principalColumn: "product_id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_lineItem_OrderNumber",
+                name: "IX_lineItem_order_number",
                 table: "lineItem",
                 column: "order_number");
 
@@ -124,9 +124,9 @@ namespace DataAccessLogic.Migrations
                 column: "product_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_orders_customer_id",
+                name: "IX_orders_cust_id",
                 table: "orders",
-                column: "customer_id");
+                column: "cust_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_orders_store_id",
