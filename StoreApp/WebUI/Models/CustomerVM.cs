@@ -8,6 +8,10 @@ namespace WebUI.Models
 {
     public class CustomerVM
     {
+        public CustomerVM()
+        {
+
+        }
         public CustomerVM(Customer p_cust)
         {
             this.CustId = p_cust.CustID;

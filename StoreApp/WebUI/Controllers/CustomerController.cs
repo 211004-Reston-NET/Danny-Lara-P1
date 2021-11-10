@@ -23,13 +23,12 @@ namespace WebUI.Controllers
             return View(_customerBL.GetAll().Select(cust => new CustomerVM(cust)).ToList());
         }
 
-        // GET: CustomerController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
-        // GET: CustomerController/Create
         [HttpPost]
         public ActionResult Create(CustomerVM p_cust)
         {
@@ -44,21 +43,6 @@ namespace WebUI.Controllers
                 });
             }
             return RedirectToAction(nameof(Index));
-        }
-
-        // POST: CustomerController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: CustomerController/Edit/5
