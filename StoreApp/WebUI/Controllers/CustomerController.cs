@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,20 @@ namespace WebUI.Controllers
         }
 
         // GET: CustomerController/Create
-        public ActionResult Create()
+        [HttpPost]
+        public ActionResult Create(CustomerVM p_cust)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+                _customerBL.Add(new Customer()
+                {
+                    Name = p_cust.Name,
+                    Address = p_cust.Address,
+                    PhoneNumber = p_cust.PhoneNumber,
+                    Email = p_cust.Email
+                });
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: CustomerController/Create

@@ -3,3 +3,36 @@
 *@
 @{
 }
+
+@model WebUI.Models.CustomerVM
+
+<h1>Create New Customer</h1>
+<br/>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="mb-3">
+        <label asp-for="Name" class="col-form-label">Name</label>
+        <input asp-for="Name" type="text" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Address" class="col-form-label">Address</label>
+        <input asp-for="Address" type="text" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="col-form-label">Email</label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PhoneNumber" class="col-form-label">Phone #</label>
+        <input asp-for="PhoneNumber" type="text" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary" value="Create">Submit</button>
+</form>
