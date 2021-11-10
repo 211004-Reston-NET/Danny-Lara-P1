@@ -13,6 +13,7 @@
             <th>Store ID</th>
             <th>Store Name</th>
             <th>Address</th>
+            <th></th>
         </tr>
        @foreach (StoreVM store in Model)
        {
@@ -20,6 +21,9 @@
                <td>@Html.DisplayFor(s => store.StoreId)</td>
                <td>@Html.DisplayFor(s => store.Name)</td>
                <td>@Html.DisplayFor(s => store.Address)</td>
+               <td>
+                   <button class="btn btn-primary">@Html.ActionLink("Products","Index","Product", new {storeId = store.StoreId}, new {@style="color: white"})</button>
+               </td>
            </tr>
        }
     </table>
