@@ -10,7 +10,7 @@ namespace DataAccessLogic
     /// </summary>
     public class CloudRepo : IRepository
     {
-        private static DataContext _context;
+        private DataContext _context;
         public CloudRepo(DataContext p_context)
         {
             _context = p_context;
