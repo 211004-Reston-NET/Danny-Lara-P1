@@ -72,6 +72,11 @@ namespace DataAccessLogic
 
         //Product Methods
         /// <summary>
+        /// Gets all the products in the database
+        /// </summary>
+        /// <returns>All the products in the Product table</returns>
+        List<Product> GetAllProducts();
+        /// <summary>
         /// Gets all the products from a specified store 
         /// using the store's ID
         /// </summary>

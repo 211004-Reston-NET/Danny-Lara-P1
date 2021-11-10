@@ -212,6 +212,10 @@ namespace DataAccessLogic
         }
 
         //Product Methods
+        public List<Product> GetAllProducts()
+        {
+            return _context.Products.ToList();
+        }
         public List<Product> GetProductsByStoreId(int p_storeId)
         {
             List<Product> allProducts = _context.Products.ToList();
