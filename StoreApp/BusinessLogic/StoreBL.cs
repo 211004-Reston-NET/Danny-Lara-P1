@@ -44,6 +44,10 @@ namespace BusinessLogic
             }
             return result;
         }
+        public List<Product> GetAllProducts()
+        {
+            return _data.GetAllProducts();
+        }
         /// <summary>
         /// Updates the specified product in the data layer
         /// </summary>
