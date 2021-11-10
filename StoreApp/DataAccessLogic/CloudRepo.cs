@@ -25,11 +25,6 @@ namespace DataAccessLogic
             _context.SaveChanges();
             return p_store;
         }
-        private static void AddNewStore(Store p_store)
-        {
-            _context.Stores.Add(p_store);
-            _context.SaveChanges();
-        }
         public List<Store> GetAllStores()
         {
             if (_context.Stores.Count() == 0)
@@ -40,7 +35,7 @@ namespace DataAccessLogic
         /// This method will be called if the store table in the database is empty and 
         /// it will populate the store and product tables with store and product data
         /// </summary>
-        private static void StoreInit() //Used to populate the database with the stores and their products
+        private void StoreInit() //Used to populate the database with the stores and their products
         {
             Store s1 = new Store()
             {
@@ -48,7 +43,7 @@ namespace DataAccessLogic
                 Address = "321 Baltic Ave. Orlando, FL",
                 Products = new List<Product>()
             };
-            AddNewStore(s1);
+            AddStore(s1);
             Product p = new Product()
             {
                 Name = "Roses (6)",
@@ -57,7 +52,7 @@ namespace DataAccessLogic
                 Quantity = 20,
                 StoreID = 1
             };
-            AddNewProduct(p);
+            AddProduct(p);
             p = new Product()
             {
                 Name = "Roses (12)",
@@ -66,7 +61,7 @@ namespace DataAccessLogic
                 Quantity = 20,
                 StoreID = 1
             };
-            AddNewProduct(p);
+            AddProduct(p);
 
             Store s2 = new Store()
             {
@@ -74,7 +69,7 @@ namespace DataAccessLogic
                 Address = "1600 Park Place Dr. Los Angeles, CA",
                 Products = new List<Product>()
             };
-            AddNewStore(s2);
+            AddStore(s2);
             p = new Product()
             {
                 Name = "Daffodils (12)",
@@ -83,7 +78,7 @@ namespace DataAccessLogic
                 Quantity = 20,
                 StoreID = 2
             };
-            AddNewProduct(p);
+            AddProduct(p);
             p = new Product()
             {
                 Name = "Flower pot",
@@ -92,7 +87,7 @@ namespace DataAccessLogic
                 Quantity = 20,
                 StoreID = 2
             };
-            AddNewProduct(p);
+            AddProduct(p);
 
             Store s3 = new Store()
             {
@@ -100,7 +95,7 @@ namespace DataAccessLogic
                 Address = "3 Privit Dr Little Winding, UK",
                 Products = new List<Product>()
             };
-            AddNewStore(s3);
+            AddStore(s3);
             p = new Product()
             {
                 Name = "Lilies (20)",
@@ -109,7 +104,7 @@ namespace DataAccessLogic
                 Quantity = 20,
                 StoreID = 3
             };
-            AddNewProduct(p);
+            AddProduct(p);
             p = new Product()
             {
                 Name = "Fancy Vase",
@@ -118,14 +113,14 @@ namespace DataAccessLogic
                 Quantity = 20,
                 StoreID = 3
             };
-            AddNewProduct(p);
+            AddProduct(p);
             Store s4 = new Store()
             {
                 Name = "Steve's Sunflowers",
                 Address = "722 Orchard Dr. Paso Robles, CA",
                 Products = new List<Product>()
             };
-            AddNewStore(s4);
+            AddStore(s4);
             p = new Product()
             {
                 Name = "Sunflowers (12)",
@@ -134,7 +129,7 @@ namespace DataAccessLogic
                 Quantity = 20,
                 StoreID = 4
             };
-            AddNewProduct(p);
+            AddProduct(p);
             p = new Product()
             {
                 Name = "Roasted Sunflower Seeds",
@@ -143,7 +138,7 @@ namespace DataAccessLogic
                 Quantity = 20,
                 StoreID = 4
             };
-            AddNewProduct(p);
+            AddProduct(p);
         }
 
         //Customer Methods
@@ -237,11 +232,11 @@ namespace DataAccessLogic
             _context.SaveChanges();
             return p_product;
         }
-        private static void AddNewProduct(Product p_product)
+        /*private void AddNewProduct(Product p_product)
         {
             _context.Products.Add(p_product);
             _context.SaveChanges();
-        }
+        }*/
         public bool UpdateProduct(Product p_product)
         {
             try
