@@ -58,7 +58,7 @@ jobs:
       run: dotnet restore StoreApp/WebUI # The filepath will differ for yours
       
     - name: Test
-      run: dotnet test StoreApp/ --no-restore --verbosity normal
+      run: dotnet test StoreApp/ --logger trx --no-restore --verbosity normal
       
     #Build and have scanner analyze our code
     - name: Build and analyze
@@ -67,8 +67,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"211004-Reston-NET_Danny-Lara-P1" /o:"211004-reston-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build StoreApp\WebUI --configuration Release
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"211004-Reston-NET_Training-code" /o:"211004-reston-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.exclusions="**WebUI/wwwroot/lib/**" /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.vs.vstest.reportsPaths="**/TestResult/*trx"
+          dotnet build StoreApp/WebUI --configuration Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           
     - name: Publish
@@ -94,4 +94,4 @@ jobs:
         app-name: DannysApp # Replace this with your web app name
         slot-name: 'Production'
         publish-profile: ${{secrets.AZURE_WEBAPP_PUBLISH_PROFILE}}
-        package: StoreApp/WebUI/
+        package: ./publish
