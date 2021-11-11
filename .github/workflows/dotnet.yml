@@ -24,9 +24,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore StoreApp/
     - name: Build
-      run: dotnet build WebUI/ --configuration Release --no-restore
+      run: dotnet build StoreApp/ --configuration Release --no-restore
     - name: Test
-      run: dotnet test StoreApp/ --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity normal
     - name: Publish
       run: dotnet publish WebUI/ --configuration Release -o ./publish
     - name: Deploy
