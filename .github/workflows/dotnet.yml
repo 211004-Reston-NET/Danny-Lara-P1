@@ -57,6 +57,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore StoreApp/WebUI # The filepath will differ for yours
       
+    - name: Test
+      run: dotnet test wk6-DevOps/ --no-restore --verbosity normal
+      
     #Build and have scanner analyze our code
     - name: Build and analyze
       env:
