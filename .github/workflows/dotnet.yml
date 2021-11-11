@@ -22,7 +22,7 @@ jobs:
       with:
         nuget-version: ${{env.NUGET_VERSION}}
     - name: Restore dependencies
-      run: dotnet restore WebUI/
+      run: dotnet restore StoreApp/
     - name: Build
       run: dotnet build WebUI/ --configuration Release --no-restore
     - name: Test
