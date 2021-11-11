@@ -23,12 +23,6 @@ namespace WebUI.Controllers
             return View(_customerBL.GetAll().Select(cust => new CustomerVM(cust)).ToList());
         }
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult Create(CustomerVM p_cust)
         {
