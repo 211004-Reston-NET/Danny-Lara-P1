@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace WebUI.Controllers
         {
             _storeBL = p_storeBL;
         }
-        public ActionResult Index(int storeId=0)
+        public ActionResult Index(int storeId=0, int productId=0)
         {
             if (storeId == 0)
                 return View(_storeBL.GetAllProducts().Select(p => new ProductVM(p)).ToList());
@@ -24,7 +25,6 @@ namespace WebUI.Controllers
             {
                 return View(_storeBL.GetStoreProducts(storeId).Select(p => new ProductVM(p)).ToList());
             }
-                
         }
 
         // GET: ProductController/Details/5
@@ -55,9 +55,12 @@ namespace WebUI.Controllers
         }
 
         // GET: ProductController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, int add_this)
         {
-            return View();
+            Product p = _storeBL.GetProduct(id);
+            p.Quantity += add_this;
+            _storeBL.UpdateProduct(p);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: ProductController/Edit/5
