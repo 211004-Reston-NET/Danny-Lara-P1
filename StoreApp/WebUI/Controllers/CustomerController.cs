@@ -26,7 +26,8 @@ namespace WebUI.Controllers
             List<CustomerVM> result = new List<CustomerVM>();
             foreach (Customer customer in customers)
             {
-                if (customer.Name.Contains(search_name))
+                if (customer.Name.ToLower().Contains(search_name.ToLower()) || customer.Address.ToLower().Contains(search_name.ToLower()) || 
+                    customer.Email.ToLower().Contains(search_name.ToLower()))
                     result.Add(new CustomerVM
                     {
                         CustId = customer.CustID,

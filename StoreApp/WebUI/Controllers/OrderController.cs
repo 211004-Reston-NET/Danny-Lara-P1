@@ -24,7 +24,12 @@ namespace WebUI.Controllers
             return View();
         }
 
-        // GET: OrderController/Details/5
+        [HttpGet]
+        public IActionResult Details()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult Details(int custId)
         {
             List<OrderVM> orders = _customerBL.GetOrdersByCustId(custId).Select(o => new OrderVM(o)).ToList();
@@ -33,10 +38,11 @@ namespace WebUI.Controllers
             return View(orders);
         }
 
-        // GET: OrderController/Create
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult Create(int custId)
         {
-            return View();
+            CustomerVM cust = new CustomerVM(_customerBL.GetCustomer(custId));
+            return View(cust);
         }
 
         // POST: OrderController/Create
