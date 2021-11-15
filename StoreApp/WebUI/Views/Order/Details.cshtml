@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<WebUI.Models.OrderVM>
+
+<div class="text-center">
+    <h1>Orders for Customer #@Model.First().CustId</h1>
+    <table class="table table-hover">
+        <tr>
+            <th>Order #</th>
+            <th>Store ID</th>
+            <th>Total Price</th>
+        </tr>
+        @foreach (OrderVM order in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(o => order.OrderNumber)</td>
+                <td>@Html.DisplayFor(o => order.StoreId)</td>
+                <td>@Html.DisplayFor(o => order.TotalPrice)</td>
+            </tr>
+        }
+    </table>
+</div>

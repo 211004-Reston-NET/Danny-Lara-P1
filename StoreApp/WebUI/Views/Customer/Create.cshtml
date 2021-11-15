@@ -1,10 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@model WebUI.Models.CustomerVM
+﻿@model WebUI.Models.CustomerVM
 
 <h1>Create New Customer</h1>
 <br/>
@@ -24,7 +18,7 @@
 
     <div class="mb-3">
         <label asp-for="Email" class="form-label">Email</label>
-        <input asp-for="Email" type="email" class="form-control" />
+        <input asp-for="Email" type="text" class="form-control" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 

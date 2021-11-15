@@ -9,42 +9,37 @@ using WebUI.Models;
 
 namespace WebUI.Controllers
 {
-    public class ProductController : Controller
+    public class OrderController : Controller
     {
-        private StoreBL _storeBL;
-        public ProductController(StoreBL p_storeBL)
+        private readonly StoreBL _storeBL;
+        private readonly CustomerBL _customerBL;
+        public OrderController(StoreBL p_storeBL, CustomerBL p_customerBL)
         {
             _storeBL = p_storeBL;
+            _customerBL = p_customerBL;
         }
-        // GET: ProductController
-        /*public ActionResult Index()
-        {
-            return View(_storeBL.GetAllProducts().Select(p => new ProductVM(p)).ToList());
-        }*/
-        public ActionResult Index(int? storeId)
-        {
-            if (storeId == null)
-                return View(_storeBL.GetAllProducts().Select(p => new ProductVM(p)).ToList());
-            else
-            {
-                return View(_storeBL.GetStoreProducts((int)storeId).Select(p => new ProductVM(p)).ToList());
-            }
-                
-        }
-
-        // GET: ProductController/Details/5
-        public ActionResult Details(int id)
+        // GET: OrderController
+        public ActionResult Index()
         {
             return View();
         }
 
-        // GET: ProductController/Create
+        // GET: OrderController/Details/5
+        public ActionResult Details(int custId)
+        {
+            List<OrderVM> orders = _customerBL.GetOrdersByCustId(custId).Select(o => new OrderVM(o)).ToList();
+            if (orders == null)
+                return View(new List<OrderVM>());
+            return View(orders);
+        }
+
+        // GET: OrderController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ProductController/Create
+        // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -59,13 +54,13 @@ namespace WebUI.Controllers
             }
         }
 
-        // GET: ProductController/Edit/5
+        // GET: OrderController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: ProductController/Edit/5
+        // POST: OrderController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -80,13 +75,13 @@ namespace WebUI.Controllers
             }
         }
 
-        // GET: ProductController/Delete/5
+        // GET: OrderController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: ProductController/Delete/5
+        // POST: OrderController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

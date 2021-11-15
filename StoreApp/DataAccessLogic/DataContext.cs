@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Models;
@@ -7,7 +8,7 @@ using Models;
 
 namespace DataAccessLogic
 {
-    public partial class DataContext : DbContext
+    public partial class DataContext : DbContext //IdentityDbContext
     {
         public DataContext()
         {

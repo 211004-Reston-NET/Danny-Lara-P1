@@ -23,6 +23,11 @@ namespace WebUI.Controllers
             return View(_customerBL.GetAll().Select(cust => new CustomerVM(cust)).ToList());
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult Create(CustomerVM p_cust)
         {
@@ -39,46 +44,22 @@ namespace WebUI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: CustomerController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Search(int p_custId)
         {
+            if(_customerBL.CustExists(p_custId))
+            {
+                Customer c = _customerBL.GetCustomer(p_custId);
+                CustomerVM result = new CustomerVM
+                {
+                    CustId = c.CustID,
+                    Name = c.Name,
+                    Address = c.Address,
+                    PhoneNumber = c.PhoneNumber,
+                    Email = c.Email
+                };
+                return View(result);
+            }
             return View();
-        }
-
-        // POST: CustomerController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CustomerController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CustomerController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
