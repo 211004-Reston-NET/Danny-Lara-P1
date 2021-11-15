@@ -16,18 +16,13 @@ namespace WebUI.Controllers
         {
             _storeBL = p_storeBL;
         }
-        // GET: ProductController
-        /*public ActionResult Index()
+        public ActionResult Index(int storeId=0)
         {
-            return View(_storeBL.GetAllProducts().Select(p => new ProductVM(p)).ToList());
-        }*/
-        public ActionResult Index(int? storeId)
-        {
-            if (storeId == null)
+            if (storeId == 0)
                 return View(_storeBL.GetAllProducts().Select(p => new ProductVM(p)).ToList());
             else
             {
-                return View(_storeBL.GetStoreProducts((int)storeId).Select(p => new ProductVM(p)).ToList());
+                return View(_storeBL.GetStoreProducts(storeId).Select(p => new ProductVM(p)).ToList());
             }
                 
         }
