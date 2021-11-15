@@ -18,9 +18,25 @@ namespace WebUI.Controllers
             _customerBL = p_customerBL;
         }
         // GET: CustomerController
-        public ActionResult Index()
+        public ActionResult Index(string search_name=null)
         {
-            return View(_customerBL.GetAll().Select(cust => new CustomerVM(cust)).ToList());
+            if(search_name == null)
+                return View(_customerBL.GetAll().Select(cust => new CustomerVM(cust)).ToList());
+            List<Customer> customers = _customerBL.GetAll();
+            List<CustomerVM> result = new List<CustomerVM>();
+            foreach (Customer customer in customers)
+            {
+                if (customer.Name.Contains(search_name))
+                    result.Add(new CustomerVM
+                    {
+                        CustId = customer.CustID,
+                        Name = customer.Name,
+                        Address = customer.Address,
+                        PhoneNumber = customer.PhoneNumber,
+                        Email = customer.Email
+                    });
+            }
+            return View(result);
         }
 
         [HttpGet]
@@ -42,24 +58,6 @@ namespace WebUI.Controllers
                 });
             }
             return RedirectToAction(nameof(Index));
-        }
-
-        public ActionResult Search(int p_custId)
-        {
-            if(_customerBL.CustExists(p_custId))
-            {
-                Customer c = _customerBL.GetCustomer(p_custId);
-                CustomerVM result = new CustomerVM
-                {
-                    CustId = c.CustID,
-                    Name = c.Name,
-                    Address = c.Address,
-                    PhoneNumber = c.PhoneNumber,
-                    Email = c.Email
-                };
-                return View(result);
-            }
-            return View();
         }
     }
 }

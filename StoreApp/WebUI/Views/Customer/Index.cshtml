@@ -4,7 +4,10 @@
     <h1>Customer Page</h1>
     <br />
     <a class="btn btn-primary text-white" asp-controller="Customer" asp-action="Create">Add Customer</a>
-    <a class="btn btn-primary text-white" asp-controller="Customer" asp-action="Search">Search</a>
+    <form>
+        <input type="text" id="search_name" name="search_name" />
+        <button type="submit" class="btn btn-primary text-white">Search</button>
+    </form>
     <br />
     <br />
     <h2>List of Customers</h2>
@@ -26,7 +29,7 @@
                 <td>@Html.DisplayFor(c => customer.PhoneNumber)</td>
                 <td>@Html.DisplayFor(c => customer.Email)</td>
                 <td>
-                    <button class="btn btn-primary">@Html.ActionLink("Order", "Details", "Order", new { custId = customer.CustId }, new { @style = "color: white" })</button>
+                    <button class="btn btn-primary">@Html.ActionLink("Orders", "Details", "Order", new { custId = customer.CustId }, new { @style = "color: white" })</button>
                 </td>
             </tr>
         }
