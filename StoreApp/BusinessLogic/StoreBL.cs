@@ -112,6 +112,14 @@ namespace BusinessLogic
             return _data.GetOrdersByStoreId(p_storeId);
         }
         /// <summary>
+        /// Returns all the orders in the database
+        /// </summary>
+        /// <returns>All orders in the database</returns>
+        public List<Order> GetAllOrders()
+        {
+            return _data.GetAllOrders();
+        }
+        /// <summary>
         /// Checks to see if the specified customer exists 
         /// in the current database
         /// </summary>
