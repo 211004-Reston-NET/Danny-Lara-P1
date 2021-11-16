@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WebUI.Models.ProductVM>
 
 <div class="text-center">
-    <h1>Store Products</h1>
+    <h1>@ViewBag.StoreName Products</h1>
     <table class="table table-hover">
         <tr>
             <th>Product ID</th>
@@ -20,9 +20,10 @@
                 <td>@Html.DisplayFor(p => product.Description)</td>
                 <td>@Html.DisplayFor(p => product.Quantity)</td>
                 <td>
-                    <form>
-                        <input type="number" id="add_this" name="add_this" />
-                        <button class="btn btn-primary">@Html.ActionLink("Add Quantity", "Edit", "Product", new { productId = product.Id }, new { @style = "color: white" })</button>
+                    <form asp-action="Edit" asp-controller="Product">
+                        <input type="number" class="form-control" id="addThis" name="addThis" value=@ViewBag.AddThis/>
+                        <input type="hidden" id="id" name="id" value=@product.Id />
+                        <button type="submit" id="Edit" class="btn btn-primary text-white">Add Quantity</button>
                     </form>
                 </td>
             </tr>

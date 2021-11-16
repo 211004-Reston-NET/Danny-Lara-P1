@@ -20,9 +20,13 @@ namespace WebUI.Controllers
         public ActionResult Index(int storeId=0, int productId=0)
         {
             if (storeId == 0)
+            {
+                ViewBag.StoreName = "Store";
                 return View(_storeBL.GetAllProducts().Select(p => new ProductVM(p)).ToList());
+            }
             else
             {
+                ViewBag.StoreName = _storeBL.GetStore(storeId).Name;
                 return View(_storeBL.GetStoreProducts(storeId).Select(p => new ProductVM(p)).ToList());
             }
         }
@@ -55,21 +59,24 @@ namespace WebUI.Controllers
         }
 
         // GET: ProductController/Edit/5
-        public ActionResult Edit(int id, int add_this)
+        [HttpGet]
+        public ActionResult Edit(int id, int addThis)
         {
-            Product p = _storeBL.GetProduct(id);
-            p.Quantity += add_this;
-            _storeBL.UpdateProduct(p);
-            return RedirectToAction(nameof(Index));
+            ViewBag.AddThis = addThis;
+            ViewBag.Product = id;
+            return View(new ProductVM(_storeBL.GetProduct(id)));
         }
 
         // POST: ProductController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, int addThis, IFormCollection collection)
         {
             try
             {
+                Product p = _storeBL.GetProduct(id);
+                p.Quantity += addThis;
+                _storeBL.UpdateProduct(p);
                 return RedirectToAction(nameof(Index));
             }
             catch
