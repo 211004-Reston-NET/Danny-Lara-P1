@@ -30,7 +30,8 @@
                 <td>@Html.DisplayFor(c => customer.PhoneNumber)</td>
                 <td>@Html.DisplayFor(c => customer.Email)</td>
                 <td>
-                    <button class="btn btn-primary">@Html.ActionLink("Orders", "Details", "Order", new { custId = customer.CustId }, new { @style = "color: white" })</button>
+                <td>
+                    <button class="btn btn-primary">@Html.ActionLink("Order History", "Index", "Order", new { p_custId = customer.CustId }, new { @style = "color: white" })</button>
                 </td>
                 <td>
                     <button class="btn btn-primary">@Html.ActionLink("Place Order", "Create", "Order", new { custId = customer.CustId }, new { @style = "color: white" })</button>

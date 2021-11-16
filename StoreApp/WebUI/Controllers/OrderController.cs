@@ -19,23 +19,94 @@ namespace WebUI.Controllers
             _customerBL = p_customerBL;
         }
         // GET: OrderController
-        public ActionResult Index()
+        public ActionResult Index(int p_storeId=0, int p_custId=0)
         {
-            return View();
+            if (p_storeId == 0 && p_custId == 0)
+            {
+                List<OrderVM> orders = new List<OrderVM>();
+                orders.Add(new OrderVM
+                {
+                    CustId = 0,
+                    OrderNumber = 0,
+                    StoreId = 0,
+                    TotalPrice = 0
+                });
+                ViewBag.Name = "NOT FOUND";
+                return View(orders);
+            }
+            else if (p_storeId != 0)
+            {
+                ViewBag.Name = _storeBL.GetStore(p_storeId).Name;
+                return View(_storeBL.GetOrdersByStoreID(p_storeId).Select(o => new OrderVM(o)).ToList());
+            }
+            else
+            {
+                ViewBag.Name = _customerBL.GetCustomer(p_custId).Name;
+                return View(_customerBL.GetOrdersByCustId(p_custId).Select(o => new OrderVM(o)).ToList());
+            }
         }
 
         [HttpGet]
-        public IActionResult Details()
+        public ActionResult StoreDetails(int p_storeId)
         {
-            return View();
+            ViewBag.Name = _storeBL.GetStore(p_storeId).Name;
+            ViewBag.Id = p_storeId;
+            List<OrderVM> orders = _storeBL.GetOrdersByStoreID(p_storeId).Select(o => new OrderVM(o)).ToList();
+            if (orders.Count == 0 || orders == null)
+            {
+                orders = new List<OrderVM>();
+                orders.Add(new OrderVM
+                {
+                    CustId = 0,
+                    OrderNumber = 0,
+                    StoreId = 0,
+                    TotalPrice = 0
+                });
+            }
+            return View(orders);
         }
         [HttpPost]
-        public ActionResult Details(int custId)
+        public ActionResult StoreDetails(int p_storeId, IFormCollection collection)
         {
-            List<OrderVM> orders = _customerBL.GetOrdersByCustId(custId).Select(o => new OrderVM(o)).ToList();
-            if (orders == null)
-                return View(new List<OrderVM>());
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpGet]
+        public ActionResult CustDetails(int p_id)
+        {
+            ViewBag.Name = _customerBL.GetCustomer(p_id).Name;
+            ViewBag.Id = p_id;
+            List<OrderVM> orders = _customerBL.GetOrdersByCustId(p_id).Select(o => new OrderVM(o)).ToList();
+            if (orders.Count == 0 || orders == null)
+            {
+                orders = new List<OrderVM>();
+                orders.Add(new OrderVM
+                {
+                    CustId = 0,
+                    OrderNumber = 0,
+                    StoreId = 0,
+                    TotalPrice = 0
+                });
+            }
             return View(orders);
+        }
+        [HttpPost]
+        public ActionResult CustDetails(int p_id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         [HttpGet]
