@@ -1,1 +1,24 @@
-﻿@model WebUI.Models.CustomerVM
+﻿@model IEnumerable<WebUI.Models.StoreVM>
+
+<div class="text-center">
+    <h1>List of Stores</h1>
+    <table class="table table-hover">
+        <tr>
+            <th>Store ID</th>
+            <th>Store Name</th>
+            <th>Address</th>
+            <th></th>
+        </tr>
+        @foreach (StoreVM store in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(s => store.StoreId)</td>
+                <td>@Html.DisplayFor(s => store.Name)</td>
+                <td>@Html.DisplayFor(s => store.Address)</td>
+                <td>
+                    <button class="btn btn-primary">@Html.ActionLink("Order Here", "ChosenStore", "Order", new { storeId = store.StoreId, custId = ViewBag.CustId }, new { @style = "color: white" })</button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

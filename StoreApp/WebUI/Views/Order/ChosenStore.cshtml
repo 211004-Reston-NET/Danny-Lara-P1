@@ -1,0 +1,34 @@
+﻿@model IEnumerable<WebUI.Models.ProductVM>
+
+<div class="text-center">
+    <h1>@ViewBag.StoreName Products</h1>
+    <table class="table table-hover">
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Quantity in Stock</th>
+            <th></th>
+        </tr>
+        @foreach (ProductVM product in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(p => product.Id)</td>
+                <td>@Html.DisplayFor(p => product.Name)</td>
+                <td>@Html.DisplayFor(p => product.Price)</td>
+                <td>@Html.DisplayFor(p => product.Description)</td>
+                <td>@Html.DisplayFor(p => product.Quantity)</td>
+                <td>
+                    <form asp-action="AddToOrder" asp-controller="Order">
+                        <input type="number" class="form-control" id="quantity" name="quantity" />
+                        <input type="hidden" id="custId" name="custId" value=@ViewBag.CustId />
+                        <input type="hidden" id="productId" name="productId" value=@product.Id />
+                        <input type="hidden" id="storeId" name="storeId" value=@ViewBag.StoreId />
+                        <button type="submit" id="AddToOrder" class="btn btn-primary text-white">Add To Order</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

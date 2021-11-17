@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace WebUI.Controllers
     {
         private readonly StoreBL _storeBL;
         private readonly CustomerBL _customerBL;
+        static List<LineItems> lineItems = new List<LineItems>();
         public OrderController(StoreBL p_storeBL, CustomerBL p_customerBL)
         {
             _storeBL = p_storeBL;
@@ -41,14 +43,14 @@ namespace WebUI.Controllers
         [HttpGet]
         public ActionResult Create(int custId)
         {
-            CustomerVM cust = new CustomerVM(_customerBL.GetCustomer(custId));
-            return View(cust);
+            ViewBag.CustId = custId;
+            return View(_storeBL.GetAll().Select(s => new StoreVM(s)).ToList());
         }
 
         // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(int custId, List<LineItemVM> orderList, IFormCollection collection)
         {
             try
             {
@@ -60,6 +62,50 @@ namespace WebUI.Controllers
             }
         }
 
+        public ActionResult ChosenStore(int storeId, int custId)
+        {
+            ViewBag.CustId = custId;
+            ViewBag.StoreName = _storeBL.GetStore(storeId).Name;
+            ViewBag.StoreId = storeId;
+            return View(_storeBL.GetStoreProducts(storeId).Select(p => new ProductVM(p)).ToList());
+        }
+
+        public ActionResult AddToOrder(int productId, int storeId, int quantity, int custId)
+        {
+            ViewBag.CustId = custId;
+            ViewBag.StoreName = _storeBL.GetStore(storeId).Name;
+            ViewBag.StoreId = storeId;
+            lineItems.Add(new LineItems(_storeBL.GetProduct(productId), productId, quantity));
+            return RedirectToAction("Cart", "Order", new { custId, storeId });
+        }
+
+        public ActionResult Cart(int custId, int storeId)
+        {
+            ViewBag.CustId = custId;
+            ViewBag.StoreId = storeId;
+            List<LineItemVM> items = new();
+            double total = 0;
+            foreach (LineItems item in lineItems)
+            {
+                total += item.Quantity * _storeBL.GetProduct(item.ProductID).Price;
+                items.Add(new LineItemVM {
+                    ProductID = item.ProductID,
+                    ProductName = item.Product.Name,
+                    Quantity = item.Quantity,
+                    Price = item.Product.Price});
+            }
+            ViewBag.TotalPrice = total;
+            return View(items);
+        }
+
+        public ActionResult PlaceOrder(int custId, int storeId)
+        {
+            Store s = _storeBL.GetStore(storeId);
+            Order order = new Order(lineItems, s);
+            order.CustID = custId;
+            _storeBL.AddOrder(order);
+            return RedirectToAction("Index", "Customer");
+        }
         // GET: OrderController/Edit/5
         public ActionResult Edit(int id)
         {
@@ -70,27 +116,6 @@ namespace WebUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: OrderController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: OrderController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
