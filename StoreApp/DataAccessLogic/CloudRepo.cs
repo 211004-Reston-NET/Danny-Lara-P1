@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Models;
 using System.Linq;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLogic
 {
@@ -174,7 +175,8 @@ namespace DataAccessLogic
         //Order Methods
         public int AddOrder(Order p_order)
         {
-            _context.Orders.Add(p_order);
+            _context.Entry(p_order).State = EntityState.Added;    //Orders.Add(p_order);
+            //_context.Entry(p_order.Cust).State = EntityState.Modified;
             _context.SaveChanges();
             List<Order> orders = GetAllOrders();
             return orders[orders.Count-1].OrderNumber;
@@ -232,11 +234,6 @@ namespace DataAccessLogic
             _context.SaveChanges();
             return p_product;
         }
-        /*private void AddNewProduct(Product p_product)
-        {
-            _context.Products.Add(p_product);
-            _context.SaveChanges();
-        }*/
         public bool UpdateProduct(Product p_product)
         {
             try
@@ -266,7 +263,9 @@ namespace DataAccessLogic
         }
         public LineItems AddLineItem(LineItems p_lineItem)
         {
-            _context.LineItems.Add(p_lineItem);
+            _context.Entry(p_lineItem).State = EntityState.Added;//LineItems.Add(p_lineItem);
+            UpdateProduct(p_lineItem.Product);
+            //_context.Entry(p_lineItem.Product).State = EntityState.Modified;
             _context.SaveChanges();
             return p_lineItem;
         }

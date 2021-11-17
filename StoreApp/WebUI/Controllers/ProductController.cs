@@ -17,7 +17,7 @@ namespace WebUI.Controllers
         {
             _storeBL = p_storeBL;
         }
-        public ActionResult Index(int storeId=0, int productId=0)
+        public ActionResult Index(int storeId=0)
         {
             if (storeId == 0)
             {
@@ -77,7 +77,7 @@ namespace WebUI.Controllers
                 Product p = _storeBL.GetProduct(id);
                 p.Quantity += addThis;
                 _storeBL.UpdateProduct(p);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Product", new { storeId = id });
             }
             catch
             {
