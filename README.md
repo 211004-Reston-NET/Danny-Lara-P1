@@ -1,6 +1,4 @@
-# PROJECT NAME
-
-FlowerShop App
+# FlowerShop App
 
 ## Project Description
 
